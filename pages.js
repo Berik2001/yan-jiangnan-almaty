@@ -91,7 +91,8 @@ const views={
  <div class="mapw"><iframe loading="lazy" src="https://maps.google.com/maps?q=Almaty%20Kazakhstan&z=13&output=embed"></iframe></div></div>`
 };
 function openD(i){const d=M[i];mod.innerHTML=`<div class="box">${img(d[0],900)}<div class="b"><span class="x" onclick="mod.classList.remove('on')">×</span><div class="zh" style="color:var(--gold)">${d[5]}</div><h2>${d[5+LI[document.documentElement.lang]]}</h2><div class="price" style="font-size:22px">${d[1].toLocaleString()} ₸</div><br><a class="btn" href="contact.html#res">${t("order")} →</a></div></div>`;mod.classList.add("on")}
-function render(){if(views[pg]){root.innerHTML=views[pg]()+foot;bind()}setL(document.documentElement.lang)}
+function render(){if(views[pg]){root.innerHTML=views[pg]()+foot;bind()}setL(document.documentElement.lang);burger()}
+function burger(){const n=document.querySelector("nav");if(!n||n.querySelector(".bur"))return;const b=document.createElement("button");b.className="bur";b.setAttribute("aria-label","menu");b.innerHTML="<i></i><i></i><i></i>";b.onclick=()=>n.classList.toggle("open");n.appendChild(b)}
 function bind(){document.querySelectorAll(".lang button").forEach(b=>b.onclick=()=>{document.documentElement.lang=b.dataset.l;render()})}
 let s0;try{s0=localStorage.lang}catch(e){}document.documentElement.lang=D[s0]?s0:"zh";
 if(!views[pg])bind();render();
