@@ -203,3 +203,9 @@ html,body{overflow-x:hidden;max-width:100%}img{max-width:100%}@media(max-width:9
  .bur{flex:none;width:40px;height:38px;order:3}
 }
 @media(max-width:400px){.logo span{display:none}.logo i{width:36px;height:36px}}
+@media(max-width:900px){
+ nav{flex-wrap:nowrap}
+ .logo{flex:1 1 0;overflow:hidden}.logo span{font-size:12px;white-space:normal;line-height:1.2}
+ nav .links{position:absolute;top:100%;left:16px;right:16px;width:auto;margin:0}
+}
+@media(max-width:380px){.logo span{display:none}}
