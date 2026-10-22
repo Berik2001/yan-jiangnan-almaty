@@ -76,6 +76,24 @@ function rDet(i){const x=RM[i];let k=rIdx[i]||0;const m=document.getElementById(
  pv.onclick=()=>{k=(k-1+x[0].length)%x[0].length;draw()};nx.onclick=()=>{k=(k+1)%x[0].length;draw()};m.querySelectorAll(".rstrip img").forEach(im=>im.onclick=()=>{k=+im.dataset.j;draw()})};
  draw();m.classList.add("on")}
 function lb(p){mod.innerHTML=`<div class="box rbox"><div class="rbig" style="background-image:url(img/h/${p}.jpg);height:70vh"><span class="x" onclick="mod.classList.remove('on')">×</span></div></div>`;mod.classList.add("on")}
+
+const HS={t1:["阿拉木图的<br>理想商务下榻之地","Идеальный бизнес-отель<br>в центре Алматы","Your ideal business stay<br>in Almaty","Алматыдағы мінсіз<br>іскерлік қонақ үй"],
+ t2:["舒适入住 · 中式美食 · 专业会议 · 贴心服务","Комфорт · Китайская кухня · Конференции · Сервис","Comfort · Chinese cuisine · Meetings · Care","Жайлылық · Қытай асханасы · Конференция · Қызмет"],
+ bk:["立即预订","Забронировать","Book now","Брондау"],ex:["探索客房","Смотреть номера","Explore rooms","Бөлмелерді көру"],
+ ci:["入住日期","Заезд","Check-in","Кіру"],co:["退房日期","Выезд","Check-out","Шығу"],gs:["入住人数","Гости","Guests","Қонақтар"],g2:["2位客人","2 гостя","2 guests","2 қонақ"],chk:["查看房价与预订","Цены и бронь","Check rates & book","Баға және бронь"],
+ f:[["优越地理位置","Удобное расположение","Prime location","Ыңғайлы орналасу","位于阿拉木图市中心<br>出行便捷","В центре Алматы,<br>удобный транспорт","In central Almaty,<br>easy to get around","Алматы орталығында,<br>көлікке ыңғайлы"],
+  ["正宗中餐美食","Китайская кухня","Authentic Chinese food","Қытай асханасы","宴江南中餐厅<br>地道中式风味","Ресторан «Янь Цзяннань»,<br>настоящий вкус Китая","Yan Jiangnan restaurant,<br>true Chinese flavour","«Янь Цзяннань» мейрамханасы,<br>нағыз қытай дәмі"],
+  ["舒适豪华客房","Уютные номера","Comfortable rooms","Жайлы бөлмелер","宽敞明亮的住宿空间<br>满足商务与休闲需求","Просторные светлые номера<br>для работы и отдыха","Spacious, bright rooms<br>for business and leisure","Кең әрі жарық бөлмелер<br>жұмыс пен демалысқа"],
+  ["专业会议与宴会","Конференции и банкеты","Meetings & banquets","Конференция және банкет","多功能会议厅<br>一站式活动服务","Многофункциональные залы,<br>сервис под ключ","Multi-purpose halls,<br>full-service events","Көпфункционалды залдар,<br>толық қызмет"]],
+ rT:["舒适客房","Комфортные номера","Comfortable rooms","Жайлы бөлмелер"],rD:["宽敞舒适的住宿空间，现代化设施与贴心服务，为商务与休闲旅客打造理想的入住体验。","Просторные номера, современное оснащение и внимательный сервис — идеально для деловых поездок и отдыха.","Spacious rooms, modern amenities and attentive service — ideal for business and leisure travellers.","Кең бөлмелер, заманауи жабдық және мұқият қызмет — іссапар мен демалысқа."],rA:["查看所有房型","Все номера","View all rooms","Барлық бөлмелер"],
+ cT:["宴江南 · 中国菜","Янь Цзяннань · Китайская кухня","Yan Jiangnan · Chinese cuisine","Янь Цзяннань · Қытай асханасы"],cD:["在阿拉木图品尝正宗的中国美食。<br>精选食材，地道风味，为您呈现精致的中餐体验。","Настоящая китайская кухня в Алматы.<br>Отборные продукты и аутентичный вкус.","Authentic Chinese cuisine in Almaty.<br>Fine ingredients and genuine flavour.","Алматыдағы нағыз қытай асханасы.<br>Таңдаулы өнімдер мен түпнұсқа дәм."],cA:["查看菜单","Смотреть меню","View menu","Мәзірді көру"],
+ ci4:[["👨‍🍳","地道中式风味","Аутентичный вкус","Authentic flavour","Түпнұсқа дәм"],["🌿","精选新鲜食材","Свежие продукты","Fresh ingredients","Жаңа өнімдер"],["💎","优雅用餐环境","Элегантный зал","Elegant setting","Сәнді зал"],["👥","私人包间服务","VIP-комнаты","Private rooms","VIP бөлмелер"]],
+ mT:["会议与宴会","Конференции и банкеты","Meetings & events","Конференция және банкет"],mD:["多功能会议厅配备先进的视听设备，适用于商务会议、企业活动、婚宴及各类宴会。专业团队为您提供一站式服务。","Многофункциональные залы с современной техникой для встреч, корпоративов, свадеб и банкетов. Команда профессионалов — сервис под ключ.","Multi-purpose halls with modern AV equipment for meetings, corporate events, weddings and banquets — full service by our team.","Заманауи техникасы бар залдар: кездесу, корпоратив, той және банкет. Толық қызмет."],mA:["了解更多","Подробнее","Learn more","Толығырақ"],
+ m4:[["🏛","多功能会议厅","Многофункц. залы","Multi-purpose halls","Көпфункц. залдар","可容纳 50-200 人","на 50–200 гостей","50–200 guests","50–200 қонақ"],["🖥","先进视听设备","Современная техника","Modern AV","Заманауи техника","LED屏幕 · 同传设备","LED-экраны · синхрон","LED screens · interpreting","LED экран · аударма"],["🎀","专业宴会服务","Банкетный сервис","Banquet service","Банкет қызметі","婚宴 · 生日宴 · 公司年会","свадьбы · юбилеи · корпоративы","weddings · birthdays · corporate","той · мерейтой · корпоратив"],["🎨","定制化活动方案","Индивидуальный план","Tailored events","Жеке жоспар","满足不同需求","под любые задачи","for every need","кез келген қажеттілікке"]],
+ lT:["优越的地理位置","Удобное расположение","Prime location","Ыңғайлы орналасу"],lD:["酒店位于阿拉木图市中心，交通便利，轻松前往机场、商业区及主要景点。","Отель в центре Алматы: легко добраться до аэропорта, деловых районов и достопримечательностей.","Located in central Almaty with easy access to the airport, business districts and main sights.","Қонақ үй Алматы орталығында: әуежай мен көрікті жерлерге жақын."],lA:["查看位置","На карте","View location","Картада"],
+ l4:[["✈️","25","阿拉木图国际机场","Аэропорт Алматы","Almaty Airport","Алматы әуежайы"],["🏙","10","市中心","Центр города","City centre","Қала орталығы"],["💼","10","商务区","Деловой район","Business district","Іскерлік аудан"],["⛰","30","著名景点","Достопримечательности","Main sights","Көрікті жерлер"]],
+ min:["分钟","мин","min","мин"],det:["详细位置","Маршрут","Directions","Бағыт"],cen:["阿拉木图市中心","Центр Алматы","Central Almaty","Алматы орталығы"]};
+const h=k=>HS[k][LI[document.documentElement.lang]],L=()=>LI[document.documentElement.lang];
 const t=k=>S[k][LI[document.documentElement.lang]],nm=a=>a[LI[document.documentElement.lang]];
 const img=(id,w=700)=>`<img src="${U+id}?w=${w}" loading="lazy" onerror="this.onerror=null;this.src='${FB}'">`;
 const pg=document.body.dataset.page;let cat=-1;
@@ -92,6 +110,23 @@ const foot=`<footer><div class="fg"><div><div class="logo" style="color:#fff"><i
 <div><h4 data-t="fl"></h4><ul><li>WeChat · Instagram · WhatsApp</li></ul></div></div><div class="copy"><span>© 2026 Yan Jiangnan Almaty</span><span data-t="pr"></span></div></footer>`;
 
 const views={
+ home:()=>shell("","").replace(/url\([^)]*\)/,"url(img/h/28.jpg)").replace("hero phero","hero hh").replace(/<div class="in">[\s\S]*<\/header>/,`<div class="in"><div class="en hl">Business Hotel Almaty</div><h1>${h("t1")}</h1><div class="sub">${h("t2")}</div>
+ <div class="hb"><a class="btn" href="contact.html#res">${h("bk")} →</a><a class="btn ghost" href="rooms.html">${h("ex")} →</a></div></div></header>`)+`
+ <form class="hbook" onsubmit="location.href='rooms.html';return false">
+  <label><span>📅</span><div><small>${h("ci")}</small><input type="date" value="2026-10-25"></div></label>
+  <label><span>📅</span><div><small>${h("co")}</small><input type="date" value="2026-10-26"></div></label>
+  <label><span>👤</span><div><small>${h("gs")}</small><select><option>${h("g2")}</option><option>1</option><option>3</option><option>4</option></select></div></label>
+  <button class="btn">${h("chk")} →</button></form>
+ <div class="hf">${HS.f.map((f,i)=>`<div><span>${["📍","🍴","🛏","👥"][i]}</span><div><b>${f[L()]}</b><small>${f[4+L()]}</small></div></div>`).join("")}</div>
+ <section class="hrooms"><div class="hri" style="background-image:url(img/h/44.jpg)"></div><div class="hrt"><div class="en">Rooms —</div><h2>${h("rT")}</h2><p>${h("rD")}</p><a class="btn" href="rooms.html">${h("rA")} →</a>
+  <div class="hrth">${RM.slice(0,4).map(x=>`<a href="rooms.html"><img src="img/h/${x[0][0]}.jpg" loading="lazy"><span>${x[6+L()]}</span></a>`).join("")}</div></div></section>
+ <section class="hres"><div><div class="en">Restaurant —</div><h2>${h("cT")}</h2><p>${h("cD")}</p><a class="btn" href="menu.html">${h("cA")} →</a></div>
+  <div class="hic">${HS.ci4.map(c=>`<div><span>${c[0]}</span>${c[1+L()]}</div>`).join("")}</div></section>
+ <section class="hmeet" style="background-image:linear-gradient(90deg,#faf5ec 30%,#faf5ec00 55%,#1d1611dd 70%),url(img/h/14.jpg)"><div class="hmt"><div class="en">Meetings & Events —</div><h2>${h("mT")}</h2><p>${h("mD")}</p><a class="btn" href="banquet.html">${h("mA")} →</a></div>
+  <div class="hm4">${HS.m4.map(m=>`<div><span>${m[0]}</span><div><b>${m[1+L()]}</b><small>${m[5+L()]}</small></div></div>`).join("")}</div></section>
+ <section class="hloc"><div class="hlt"><div class="en">Prime Location</div><h2>${h("lT")}</h2><p>${h("lD")}</p><a class="btn" href="contact.html">${h("lA")} →</a></div>
+  <div class="hl4">${HS.l4.map(l=>`<div><span>${l[0]}</span><b>${l[1]} ${h("min")}</b><small>${l[2+L()]}</small></div>`).join("")}</div>
+  <div class="hmap"><iframe loading="lazy" src="https://maps.google.com/maps?q=Almaty&z=12&output=embed"></iframe><div class="pin">📍 <div><b>Business Hotel Almaty</b><small>${h("cen")}</small><a href="contact.html">${h("det")} →</a></div></div></div></section>`,
  rooms:()=>shell(r("rT"),"").replace(/url\([^)]*\)/,"url(img/h/28.jpg)").replace("</h1>",`</h1><p class="psub">${r("rSub")}</p>`)+`
  <div class="wrap"><form class="rsearch" onsubmit="location.href='contact.html#res';return false">
   <label><span>📅</span><div><small>${r("ci")}</small><b><input type="date" value="2026-11-08"> — <input type="date" value="2026-11-27"></b></div></label>
