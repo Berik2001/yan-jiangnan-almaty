@@ -94,42 +94,88 @@ const HS={t1:["阿拉木图的<br>理想商务下榻之地","Идеальный 
  l4:[["✈️","25","阿拉木图国际机场","Аэропорт Алматы","Almaty Airport","Алматы әуежайы"],["🏙","10","市中心","Центр города","City centre","Қала орталығы"],["💼","10","商务区","Деловой район","Business district","Іскерлік аудан"],["⛰","30","著名景点","Достопримечательности","Main sights","Көрікті жерлер"]],
  min:["分钟","мин","min","мин"],det:["详细位置","Маршрут","Directions","Бағыт"],cen:["阿拉木图市中心","Центр Алматы","Central Almaty","Алматы орталығы"]};
 const h=k=>HS[k][LI[document.documentElement.lang]],L=()=>LI[document.documentElement.lang];
+
+const MARK=`<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 3l17 17-17 17L3 20z"/><path d="M20 10l10 10-10 10-10-10z"/><path d="M14 14l12 12M26 14L14 26"/></svg>`;
+const sv=d=>`<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+const IC={pin:sv('<path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>'),dish:sv('<path d="M3 17h18M5 17a7 7 0 0 1 14 0M12 8V6M10 6h4M4 20h16"/>'),bed:sv('<path d="M3 18v-7h18v7M3 18v2M21 18v2M5 11V7h14v4M8 11V9h3v2M13 11V9h3v2"/>'),people:sv('<circle cx="12" cy="7" r="3"/><circle cx="5" cy="9" r="2"/><circle cx="19" cy="9" r="2"/><path d="M7 20v-2a5 5 0 0 1 10 0v2M2 19v-1a3 3 0 0 1 4-2.8M22 19v-1a3 3 0 0 0-4-2.8"/>'),
+ cal:sv('<rect x="3" y="5" width="18" height="16" rx="1"/><path d="M3 10h18M8 3v4M16 3v4"/>'),user:sv('<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>'),venue:sv('<path d="M4 21V9l8-5 8 5v12M9 21v-6h6v6M3 21h18"/>'),screen:sv('<rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/>'),support:sv('<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/>'),tailor:sv('<path d="M4 20l6-6M14 4l6 6-8 8-6-6z"/><path d="M14 8l2 2"/>'),
+ plane:sv('<path d="M2 16l20-8-6 12-3-5-5 3z"/>'),city:sv('<path d="M3 21h18M5 21V8h6v13M11 21V3h8v18M7 11h2M7 14h2M14 7h2M14 10h2M14 13h2"/>'),bag:sv('<path d="M5 8h14l-1 13H6zM9 8V6a3 3 0 0 1 6 0v2"/>'),mountain:sv('<path d="M2 20l7-12 4 6 3-4 6 10z"/>')};
+const DIR="https://www.google.com/maps/dir/?api=1&destination=Business+Hotel+Almaty";
+// Integration layer: set endpoints when the hotel's booking engine / CRM is available
+const CONFIG={bookingUrl:null,eventEndpoint:null};
+const iso=d=>d.toISOString().slice(0,10),addD=(s,n)=>{const d=new Date(s);d.setDate(d.getDate()+n);return iso(d)};
+let BK;{const q=new URLSearchParams(location.search);let s={};try{s=JSON.parse(localStorage.bk||"{}")}catch(e){}const td=iso(new Date());
+ BK={ci:q.get("ci")||s.ci||td,co:q.get("co")||s.co,ad:+(q.get("ad")||s.ad||2),ch:+(q.get("ch")||s.ch||0)};if(BK.ci<td)BK.ci=td;if(!BK.co||BK.co<=BK.ci)BK.co=addD(BK.ci,1)}
+function saveBk(){try{localStorage.bk=JSON.stringify(BK)}catch(e){}}
+function gLabel(){const b=document.querySelector(".gbtn");if(b)b.textContent=`${BK.ad} ${hq("ad").toLowerCase()}${BK.ch?`, ${BK.ch} ${hq("ch").toLowerCase()}`:""}`;["ad","ch"].forEach(k=>{const e=document.getElementById("g_"+k);if(e)e.textContent=BK[k]})}
+function gStep(k,d){BK[k]=Math.max(k=="ad"?1:0,Math.min(8,BK[k]+d));saveBk();gLabel()}
+function bkInit(){const f=document.getElementById("book");if(!f)return;const ci=f.ci,co=f.co,td=iso(new Date());ci.min=td;ci.value=BK.ci;co.min=addD(BK.ci,1);co.value=BK.co;
+ ci.onchange=()=>{BK.ci=ci.value;co.min=addD(ci.value,1);if(co.value<=ci.value)co.value=addD(ci.value,1);BK.co=co.value;saveBk()};co.onchange=()=>{BK.co=co.value;saveBk()};gLabel();
+ document.addEventListener("click",e=>{const g=document.querySelector(".gsel");if(g&&!g.contains(e.target))g.classList.remove("open")})}
+function goBook(f){BK.ci=f.ci.value;BK.co=f.co.value;saveBk();const q=new URLSearchParams({ci:BK.ci,co:BK.co,ad:BK.ad,ch:BK.ch});location.href=(CONFIG.bookingUrl||"rooms.html")+"?"+q;return false}
+function evOpen(){const m=document.getElementById("evm");m.querySelector("[name=date]").min=iso(new Date());m.classList.add("on")}
+async function evSend(f){const ok=document.getElementById("evok");ok.style.display="block";
+ if(!CONFIG.eventEndpoint){ok.className="ok warn";ok.textContent=hq("noint");return false}
+ try{const r=await fetch(CONFIG.eventEndpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(Object.fromEntries(new FormData(f)))});if(!r.ok)throw 0;ok.className="ok";ok.textContent=hq("sent");f.reset()}catch(e){ok.className="ok warn";ok.textContent=hq("err")}return false}
+const HQ={t1:["阿拉木图的<br>理想商务下榻之地","Идеальный<br>бизнес-отель в Алматы","Your ideal<br>business stay<br>in Almaty","Алматыдағы мінсіз<br>іскерлік қонақ үй"],
+ t2:["舒适客房 · 正宗中餐 · 会议与宴会","Комфортные номера · Китайская кухня · Мероприятия","Comfortable rooms · Authentic Chinese dining · Meetings & events","Жайлы бөлмелер · Қытай асханасы · Іс-шаралар"],
+ bk:["立即预订","Забронировать","Book now","Брондау"],ex:["探索酒店","Об отеле","Explore the hotel","Қонақ үй туралы"],
+ ci:["入住","Заезд","Check-in","Кіру"],co:["退房","Выезд","Check-out","Шығу"],gs:["人数","Гости","Guests","Қонақтар"],ad:["成人","Взрослые","Adults","Ересектер"],ch:["儿童","Дети","Children","Балалар"],chk:["查看房价与预订","Цены и бронь","Check rates & book","Баға және бронь"],
+ f:HS.f.map((x,i)=>[...x.slice(0,4),...[["位于阿拉木图市中心","В центре Алматы","In central Almaty","Алматы орталығында"],["宴江南中餐厅","Ресторан «Янь Цзяннань»","Yan Jiangnan restaurant","«Янь Цзяннань» мейрамханасы"],["适合商务与休闲","Для работы и отдыха","For business and leisure","Жұмыс пен демалысқа"],["会议厅与宴会厅","Конференц- и банкетные залы","Meeting & banquet halls","Конференция және банкет залдары"]][i]]),
+ eR:["客房","Номера","Rooms","Бөлмелер"],rT:["舒适客房<br>高效入住","Комфортные номера<br>для продуктивной поездки","Comfortable rooms<br>for a productive stay","Нәтижелі сапарға<br>жайлы бөлмелер"],
+ rD:["精心设计的客房，舒适便利，满足商务与休闲所需。","Продуманные номера с комфортом и всем необходимым для работы и отдыха.","Thoughtfully designed rooms offering comfort, convenience and everything you need for business or leisure.","Жұмыс пен демалысқа қажеттінің бәрі бар жайлы бөлмелер."],rA:["查看所有房型","Все номера","View all rooms","Барлық бөлмелер"],
+ eD:["Business Hotel Almaty 餐饮","Ресторан отеля","Dining at Business Hotel Almaty","Қонақ үй мейрамханасы"],cT:HS.cT,cD:["在宴江南品尝正宗中国菜，传统风味与热情服务相遇。","Настоящая китайская кухня в «Янь Цзяннань» — традиционные вкусы и тёплое гостеприимство.","Experience authentic Chinese cuisine at Yan Jiangnan, where traditional flavours meet warm hospitality.","«Янь Цзяннань» — дәстүрлі дәм мен жылы қонақжайлық."],cA:["查看菜单","Смотреть меню","View menu","Мәзірді көру"],
+ eM:["会议与活动","Мероприятия","Meetings & events","Іс-шаралар"],mT:["会议与宴会<br>从容举办","Мероприятия<br>с уверенностью","Meetings & events<br>with confidence","Іс-шаралар<br>сеніммен"],mD:["灵活的场地，适合商务会议、大型会议和庆典。","Гибкие пространства для деловых встреч, конференций и праздников.","Flexible spaces for business meetings, conferences and celebrations.","Іскерлік кездесу, конференция және мерекелерге арналған залдар."],
+ mA:["活动咨询","Запрос на мероприятие","Request an event","Іс-шараға өтінім"],mS:["查看场地","Смотреть залы","Explore event spaces","Залдарды көру"],
+ m4:[["会议场地","Залы для встреч","Meeting spaces","Кездесу залдары"],["视听设备","AV-оборудование","AV equipment","AV жабдық"],["活动协调","Координация","Event coordination","Үйлестіру"],["宴会安排","Банкеты","Banquet arrangements","Банкеттер"]],
+ eL:["地理位置","Расположение","Prime location","Орналасуы"],lT:["位于阿拉木图<br>城市中心","В самом сердце<br>Алматы","Prime location<br>in the heart of Almaty","Алматының<br>дәл жүрегінде"],lD:["酒店位于阿拉木图，便于前往机场、商务区和城市景点。","Отель в Алматы — удобно добираться до аэропорта, деловых районов и достопримечательностей.","Located in Almaty with convenient access to the airport, business districts and city attractions.","Әуежайға, іскерлік аудандар мен көрікті жерлерге қолайлы."],
+ l4:[["阿拉木图国际机场","Международный аэропорт","Almaty International Airport","Халықаралық әуежай"],["市中心","Центр города","City centre","Қала орталығы"],["商务区","Деловые районы","Business districts","Іскерлік аудандар"],["城市景点","Достопримечательности","Local attractions","Көрікті жерлер"]],
+ dir:["查看路线","Маршрут","View directions","Бағыт"],brand:["舒适入住 · 用心服务","Комфортное проживание. Внимательный сервис.","Comfortable stays. Meaningful connections.","Жайлы тұру. Мұқият қызмет."],cpage:["联系页面","Страница контактов","Contact page","Байланыс беті"],lang:["语言","Язык","Language","Тіл"],
+ evt:[["商务会议","Деловая встреча","Business meeting","Іскерлік кездесу"],["大型会议","Конференция","Conference","Конференция"],["婚宴","Свадьба","Wedding","Той"],["宴会/庆典","Банкет / праздник","Banquet / celebration","Банкет / мереке"]],evd:["计划日期","Дата","Planned date","Күні"],
+ noint:["在线提交尚未连接。请通过联系页面与我们联系。","Онлайн-отправка ещё не подключена. Свяжитесь с нами через страницу контактов.","Online submission is not connected yet. Please reach us via the contact page.","Онлайн жіберу әлі қосылмаған. Байланыс беті арқылы хабарласыңыз."],sent:["已发送，我们会尽快联系您。","Заявка отправлена.","Request sent.","Өтінім жіберілді."],err:["发送失败，请稍后再试。","Ошибка отправки.","Could not send.","Жіберу қатесі."]};
+const hq=k=>HQ[k][LI[document.documentElement.lang]];
 const t=k=>S[k][LI[document.documentElement.lang]],nm=a=>a[LI[document.documentElement.lang]];
 const img=(id,w=700)=>`<img src="${U+id}?w=${w}" loading="lazy" onerror="this.onerror=null;this.src='${FB}'">`;
 const pg=document.body.dataset.page;let cat=-1;
 
 function shell(title,bg){return `<header class="hero phero" style="background-image:linear-gradient(90deg,#1a0f08ee,#1a0f0888 60%,#0004),url(${U+bg}?w=1800)">
-<nav><a class="logo" href="index.html"><i><b>宴</b></i><span>YAN JIANGNAN<br>ALMATY</span></a>
+<nav><a class="logo" href="index.html"><i class="mk">${MARK}</i><span>BUSINESS HOTEL<br>ALMATY</span></a>
 <div class="links">${[["index","n1"],["rooms","nr"],["menu","n2"],["banquet","n3"],["services","n4"],["contact","n5"]].map(([p,k])=>`<a href="${p}.html" class="${p==pg?"on":""}" data-t="${k}"></a>`).join("")}</div>
 <div class="lang">${["zh","ru","en","kz"].map(l=>`<button data-l="${l}">${l=="zh"?"中文":l.toUpperCase()}</button>`).join("")}</div>
 <a class="btn" href="contact.html#res" data-t="cta"></a></nav>
-<div class="in"><div class="en">Yan Jiangnan · Almaty</div><h1>${title}</h1><div class="crumb"><a href="index.html" data-t="n1"></a> / ${title}</div></div></header>`}
-const foot=`<footer><div class="fg"><div><div class="logo" style="color:#fff"><i><b>宴</b></i><span>YAN JIANGNAN<br>ALMATY</span></div><p style="margin-top:12px" data-t="ft"></p></div>
-<div><h4 data-t="q"></h4><ul><li><a href="index.html" data-t="n1"></a></li><li><a href="menu.html" data-t="n2"></a></li><li><a href="banquet.html" data-t="n3"></a></li><li><a href="services.html" data-t="n4"></a></li></ul></div>
-<div><h4 data-t="ct"></h4><ul><li>📞 +7 727 231 88 88</li><li>✉ info@yanjiangnan.kz</li><li data-t="addr"></li></ul></div>
-<div><h4 data-t="fl"></h4><ul><li>WeChat · Instagram · WhatsApp</li></ul></div></div><div class="copy"><span>© 2026 Yan Jiangnan Almaty</span><span data-t="pr"></span></div></footer>`;
+<div class="in"><div class="en">Business Hotel Almaty</div><h1>${title}</h1><div class="crumb"><a href="index.html" data-t="n1"></a> / ${title}</div></div></header>`}
+const foot=`<footer><div class="fg"><div><div class="logo" style="color:#fff"><i class="mk">${MARK}</i><span>BUSINESS HOTEL<br>ALMATY</span></div><p style="margin-top:12px">${hq("brand")}</p></div>
+<div><h4 data-t="q"></h4><ul><li><a href="index.html" data-t="n1"></a></li><li><a href="rooms.html" data-t="nr"></a></li><li><a href="menu.html" data-t="n2"></a></li><li><a href="banquet.html" data-t="n3"></a></li><li><a href="contact.html" data-t="n5"></a></li></ul></div>
+<div><h4 data-t="ct"></h4><ul><li><a href="contact.html">${hq("cpage")}</a></li><li><a target="_blank" rel="noopener" href="${DIR}">${hq("dir")} →</a></li></ul></div>
+<div><h4>${hq("lang")}</h4><ul class="flang">${["zh","ru","en","kz"].map(l=>`<li><button data-l="${l}">${l=="zh"?"中文":l.toUpperCase()}</button></li>`).join("")}</ul></div></div>
+<div class="copy"><span>© ${new Date().getFullYear()} Business Hotel Almaty</span><span data-t="pr"></span></div></footer>`;
 
 const views={
- home:()=>shell("","").replace(/url\([^)]*\)/,"url(img/h/28.jpg)").replace("hero phero","hero hh").replace(/<div class="in">[\s\S]*<\/header>/,`<div class="in"><div class="en hl">Business Hotel Almaty</div><h1>${h("t1")}</h1><div class="sub">${h("t2")}</div>
- <div class="hb"><a class="btn" href="contact.html#res">${h("bk")} →</a><a class="btn ghost" href="rooms.html">${h("ex")} →</a></div></div></header>`)+`
- <form class="hbook" onsubmit="location.href='rooms.html';return false">
-  <label><span>📅</span><div><small>${h("ci")}</small><input type="date" value="2026-10-25"></div></label>
-  <label><span>📅</span><div><small>${h("co")}</small><input type="date" value="2026-10-26"></div></label>
-  <label><span>👤</span><div><small>${h("gs")}</small><select><option>${h("g2")}</option><option>1</option><option>3</option><option>4</option></select></div></label>
-  <button class="btn">${h("chk")} →</button></form>
- <div class="hf">${HS.f.map((f,i)=>`<div><span>${["📍","🍴","🛏","👥"][i]}</span><div><b>${f[L()]}</b><small>${f[4+L()]}</small></div></div>`).join("")}</div>
- <section class="hrooms"><div class="hri" style="background-image:url(img/h/44.jpg)"></div><div class="hrt"><div class="en">Rooms —</div><h2>${h("rT")}</h2><p>${h("rD")}</p><a class="btn" href="rooms.html">${h("rA")} →</a>
-  <div class="hrth">${RM.slice(0,4).map(x=>`<a href="rooms.html"><img src="img/h/${x[0][0]}.jpg" loading="lazy"><span>${x[6+L()]}</span></a>`).join("")}</div></div></section>
- <section class="hres"><div><div class="en">Restaurant —</div><h2>${h("cT")}</h2><p>${h("cD")}</p><a class="btn" href="menu.html">${h("cA")} →</a></div>
-  <div class="hic">${HS.ci4.map(c=>`<div><span>${c[0]}</span>${c[1+L()]}</div>`).join("")}</div></section>
- <section class="hmeet" style="background-image:linear-gradient(90deg,#faf5ec 30%,#faf5ec00 55%,#1d1611dd 70%),url(img/h/14.jpg)"><div class="hmt"><div class="en">Meetings & Events —</div><h2>${h("mT")}</h2><p>${h("mD")}</p><a class="btn" href="banquet.html">${h("mA")} →</a></div>
-  <div class="hm4">${HS.m4.map(m=>`<div><span>${m[0]}</span><div><b>${m[1+L()]}</b><small>${m[5+L()]}</small></div></div>`).join("")}</div></section>
- <section class="hloc"><div class="hlt"><div class="en">Prime Location</div><h2>${h("lT")}</h2><p>${h("lD")}</p><a class="btn" href="contact.html">${h("lA")} →</a></div>
-  <div class="hl4">${HS.l4.map(l=>`<div><span>${l[0]}</span><b>${l[1]} ${h("min")}</b><small>${l[2+L()]}</small></div>`).join("")}</div>
-  <div class="hmap"><iframe loading="lazy" src="https://maps.google.com/maps?q=Almaty&z=12&output=embed"></iframe><div class="pin">📍 <div><b>Business Hotel Almaty</b><small>${h("cen")}</small><a href="contact.html">${h("det")} →</a></div></div></div></section>`,
+ home:()=>shell("","").replace(/url\([^)]*\)/,"url(img/h/28.jpg)").replace("hero phero","hero hh").replace(/<div class="in">[\s\S]*<\/header>/,`<div class="in"><div class="en">Business Hotel Almaty</div><h1>${hq("t1")}</h1><div class="sub">${hq("t2")}</div>
+ <div class="hb"><a class="btn" href="#book">${hq("bk")} →</a><a class="btn ghost" href="rooms.html">${hq("ex")} →</a></div></div></header>`)+`
+ <form class="hbook" id="book" onsubmit="return goBook(this)">
+  <label>${IC.cal}<div><small>${hq("ci")}</small><input type="date" name="ci" required></div></label>
+  <label>${IC.cal}<div><small>${hq("co")}</small><input type="date" name="co" required></div></label>
+  <div class="gsel">${IC.user}<div><small>${hq("gs")}</small><button type="button" class="gbtn" onclick="this.parentNode.parentNode.classList.toggle('open')"></button></div>
+   <div class="gpop">${["ad","ch"].map(k=>`<div><span>${hq(k)}</span><button type="button" onclick="gStep('${k}',-1)" aria-label="-">−</button><b id="g_${k}"></b><button type="button" onclick="gStep('${k}',1)" aria-label="+">+</button></div>`).join("")}</div></div>
+  <button class="btn">${hq("chk")} →</button></form>
+ <div class="hf">${["pin","dish","bed","people"].map((ic,i)=>`<div>${IC[ic]}<b>${HQ.f[i][L()]}</b><small>${HQ.f[i][4+L()]}</small></div>`).join("")}</div>
+ <section class="hrooms"><div class="hri" id="hri" style="background-image:url(img/h/${RM[0][0][0]}.jpg)"></div><div class="hrt"><div class="en">${hq("eR")}</div><h2>${hq("rT")}</h2><p>${hq("rD")}</p><a class="btn ghost" href="rooms.html">${hq("rA")} →</a>
+  <div class="hrth">${RM.slice(0,4).map((x,i)=>`<button type="button" class="${i?"":"on"}" onclick="hri.style.backgroundImage='url(img/h/${x[0][0]}.jpg)';this.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('on'));this.classList.add('on')"><img src="img/h/${x[0][0]}.jpg" loading="lazy" alt=""><span>${x[6+L()]}</span></button>`).join("")}</div></div></section>
+ <section class="hres2" style="background-image:linear-gradient(90deg,#1c130fee 0%,#1c130fb3 38%,#1c130f22 70%),url(img/h/37.jpg)"><div><div class="en">${hq("eD")}</div><h2>${hq("cT")}</h2><p>${hq("cD")}</p><a class="btn" href="menu.html">${hq("cA")} →</a></div></section>
+ <section class="hmeet2"><div class="hmi" style="background-image:url(img/h/14.jpg)"></div><div class="hmt"><div class="en">${hq("eM")}</div><h2>${hq("mT")}</h2><p>${hq("mD")}</p><button type="button" class="btn" onclick="evOpen()">${hq("mA")} →</button><a class="lnk" href="banquet.html">${hq("mS")} →</a></div>
+  <ul class="hm4">${["venue","screen","support","tailor"].map((ic,i)=>`<li>${IC[ic]}<b>${HQ.m4[i][L()]}</b></li>`).join("")}</ul></section>
+ <section class="hloc2"><div class="hlt"><div class="en">${hq("eL")}</div><h2>${hq("lT")}</h2><p>${hq("lD")}</p>
+  <ul class="hl4">${["plane","city","bag","mountain"].map((ic,i)=>`<li>${IC[ic]}<span>${HQ.l4[i][L()]}</span></li>`).join("")}</ul><a class="btn" target="_blank" rel="noopener" href="${DIR}">${hq("dir")} →</a></div>
+  <div class="hmap"><iframe loading="lazy" title="map" src="https://maps.google.com/maps?q=Business%20Hotel%20Almaty&z=13&output=embed"></iframe></div></section>
+ <div class="modal" id="evm" onclick="if(event.target==this)this.classList.remove('on')"><form class="box rv-f evf" onsubmit="return evSend(this)"><span class="x" onclick="evm.classList.remove('on')">×</span><h3>${hq("mA")}</h3>
+  <select name="type" class="full">${HQ.evt.map(e=>`<option>${e[L()]}</option>`).join("")}</select>
+  <div class="fl"><input type="date" name="date" required><label>${hq("evd")}</label></div><div class="fl"><input type="number" name="guests" min="1" required placeholder=" "><label>${hq("gs")}</label></div>
+  <div class="fl"><input name="name" required placeholder=" "><label>${t("nm")}</label></div><div class="fl"><input name="phone" type="tel" required placeholder=" "><label>${t("tel")}</label></div>
+  <button class="btn">${t("send").replace(" →","")} →</button><div class="ok" id="evok"></div></form></div>`,
  rooms:()=>shell(r("rT"),"").replace(/url\([^)]*\)/,"url(img/h/28.jpg)").replace("</h1>",`</h1><p class="psub">${r("rSub")}</p>`)+`
  <div class="wrap"><form class="rsearch" onsubmit="location.href='contact.html#res';return false">
-  <label><span>📅</span><div><small>${r("ci")}</small><b><input type="date" value="2026-11-08"> — <input type="date" value="2026-11-27"></b></div></label>
+  <label><span>📅</span><div><small>${r("ci")}</small><b><input type="date" value="${BK.ci}"> — <input type="date" value="${BK.co}"></b></div></label>
   <label><span>👤</span><div><small>${r("gu")}</small><b><select><option>${r("ad")}</option><option>1</option><option>3</option><option>4</option></select></b></div></label>
   <label><span>🏷</span><div><small>${r("sr")}</small><b>${r("best")}</b></div></label>
   <button class="btn">${r("mod")} →</button></form>
@@ -170,8 +216,10 @@ const views={
  <div class="mapw"><iframe loading="lazy" src="https://maps.google.com/maps?q=Almaty%20Kazakhstan&z=13&output=embed"></iframe></div></div>`
 };
 function openD(i){const d=M[i];mod.innerHTML=`<div class="box">${img(d[0],900)}<div class="b"><span class="x" onclick="mod.classList.remove('on')">×</span><div class="zh" style="color:var(--gold)">${d[5]}</div><h2>${d[5+LI[document.documentElement.lang]]}</h2><div class="price" style="font-size:22px">${d[1].toLocaleString()} ₸</div><br><a class="btn" href="contact.html#res">${t("order")} →</a></div></div>`;mod.classList.add("on")}
-function render(){if(views[pg]){root.innerHTML=views[pg]()+foot;bind()}setL(document.documentElement.lang);burger()}
+function render(){if(views[pg]){root.innerHTML=views[pg]()+foot;bind()}setL(document.documentElement.lang);burger();bkInit();document.querySelectorAll(".flang button").forEach(b=>b.onclick=()=>{document.documentElement.lang=b.dataset.l;render()})}
 function burger(){const n=document.querySelector("nav");if(!n||n.querySelector(".bur"))return;const b=document.createElement("button");b.className="bur";b.setAttribute("aria-label","menu");b.innerHTML="<i></i><i></i><i></i>";b.onclick=()=>n.classList.toggle("open");n.appendChild(b)}
 function bind(){document.querySelectorAll(".lang button").forEach(b=>b.onclick=()=>{document.documentElement.lang=b.dataset.l;render()})}
 let s0;try{s0=localStorage.lang}catch(e){}document.documentElement.lang=D[s0]?s0:"zh";
 if(!views[pg])bind();render();
+
+addEventListener("scroll",()=>{const n=document.querySelector("nav");n&&n.classList.toggle("sc",scrollY>40)},{passive:true});

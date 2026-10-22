@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../ainanet-taxi/apps/ainadriver"
+		},
+		{
+			"path": "../ainanet-taxi/apps/ainataxi"
+		}
+	],
+	"settings": {}
+}

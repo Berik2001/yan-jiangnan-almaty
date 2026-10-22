@@ -282,3 +282,85 @@ body[data-page=rooms] .phero{background-position:center 35%}
 @media(max-width:900px){.hh{min-height:auto}.hh .in{padding:30px 16px 90px}.hh h1{font-size:clamp(30px,9vw,44px)}.hh .sub{font-size:15px}
  .hbook{margin:-60px 16px 0;padding:8px 18px 18px}.hbook label{flex:1 1 100%;border-right:0;border-bottom:1px solid #f0e6d6;padding:12px 0}.hbook .btn{width:100%;margin:12px 0 0}
  .hf{padding:30px 16px}.hrt,.hres,.hmeet,.hloc{padding:36px 16px}.hri{min-height:260px}.hrt h2,.hres h2,.hmeet h2,.hloc h2{font-size:30px}.hrth{grid-template-columns:1fr 1fr}.hic{justify-content:flex-start;gap:18px}.hm4{grid-template-columns:1fr}.hres{background:linear-gradient(#1a0f08ee,#1a0f08cc),url(img/b4.jpg) center/cover}}
+/* ===== Business Hotel Almaty design system ===== */
+:root{--navy:#0B1B2A;--navy2:#071522;--ivory:#F7F3EC;--gold:#C9A46B;--gold2:#E8C894;--esp:#241914;--txt:#292521;--dark:#0B1B2A;--cream:#F7F3EC;--r:4px;--ease:250ms ease;
+ --ui:"Source Sans 3","Noto Sans SC",system-ui,sans-serif;--serif:"Cormorant Garamond","Noto Serif SC",serif}
+html:lang(zh){--ui:"Noto Sans SC",system-ui,sans-serif;--serif:"Noto Serif SC",serif}
+body{font-family:var(--ui);background:var(--ivory);color:var(--txt)}
+h1,h2,h3,.logo span{font-family:var(--serif);font-weight:600}
+html:lang(zh) h1,html:lang(zh) h2{font-weight:700}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+/* logo */
+.logo i.mk{transform:none;border:0;width:44px;height:44px;color:var(--gold)}.logo i.mk svg{width:100%;height:100%}
+.logo span{font-size:19px;letter-spacing:.06em;font-weight:500}
+/* buttons: restrained radius */
+.btn{border-radius:var(--r);background:linear-gradient(180deg,#EED3A3,#D7B47B);border-color:#C9A46B;color:#2a1d10;font-family:var(--ui);font-weight:600;letter-spacing:.02em}
+.btn:after{display:none}.btn.ghost{background:transparent;color:#fff;border:1px solid var(--gold2);box-shadow:none}
+.btn.ghost:hover{background:#ffffff14}
+/* sticky header */
+nav{position:fixed;top:0;left:0;right:0;z-index:60;background:linear-gradient(#0B1B2Ab3,#0B1B2A00);transition:background var(--ease),box-shadow var(--ease);padding:16px max(5%,24px)}
+nav.sc{background:#0B1B2Af5;box-shadow:0 2px 20px #0004}
+.hero{padding-top:80px}
+nav .links a{font-family:var(--ui);font-size:15px}nav .links a.on{border-color:var(--gold)}
+nav>.btn{border-radius:var(--r);padding:11px 26px}
+/* hero */
+.hh{min-height:720px;background-position:center 30%!important;position:relative}
+.hh:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#0B1B2Ae6 0%,#0B1B2A99 35%,#0B1B2A00 65%)}
+.hh .in{position:relative;padding:100px max(5%,24px) 170px;max-width:800px}
+.hh h1{font-size:clamp(40px,5.6vw,80px);line-height:1.08;color:#fff;background:none;-webkit-text-fill-color:#fff;font-weight:500}
+html:lang(zh) .hh h1{font-size:clamp(34px,4.6vw,64px);line-height:1.3}
+.hh .sub{font-size:18px;letter-spacing:.02em;margin-top:18px;opacity:.95}
+/* booking bar */
+.hbook{max-width:1320px;margin:-70px auto 0;border-radius:6px;padding:16px 20px;box-shadow:0 18px 50px #0B1B2A26;width:calc(100% - 10%)}
+.hbook label,.gsel{flex:1;display:flex;gap:14px;align-items:center;padding:6px 22px;border-right:1px solid #ece4d6;min-width:180px;position:relative}
+.ic{width:28px;height:28px;color:var(--gold);flex:none}
+.hbook input,.gbtn{border:0;font:inherit;font-size:16px;color:var(--txt);background:none;padding:2px 0;cursor:pointer;text-align:left}
+.gpop{display:none;position:absolute;top:calc(100% + 12px);left:0;background:#fff;border:1px solid #ece4d6;border-radius:6px;box-shadow:0 14px 40px #0002;padding:12px 16px;z-index:5;min-width:240px}
+.gsel.open .gpop{display:block;animation:pop .2s}
+.gpop div{display:flex;align-items:center;gap:10px;padding:8px 0}.gpop span{flex:1}.gpop b{width:20px;text-align:center}
+.gpop button{width:32px;height:32px;border:1px solid var(--gold);border-radius:50%;background:#fff;cursor:pointer;font-size:16px}
+.hbook .btn{border-radius:var(--r);padding:16px 36px}
+/* highlights */
+.hf{max-width:1320px;margin:0 auto;padding:64px max(3%,24px) 72px;grid-template-columns:repeat(4,1fr);text-align:center}
+.hf>div{display:block;padding:0 26px;border-right:1px solid #e3d8c5}.hf .ic{width:40px;height:40px;display:block;margin:0 auto 14px}
+.hf b{font-family:var(--serif);font-size:22px;font-weight:600}html:lang(zh) .hf b{font-size:18px}.hf small{font-size:14.5px;color:#7a6e62}
+/* rooms split */
+.hrooms{grid-template-columns:1fr 1fr;background:var(--navy)}.hri{min-height:560px;transition:background-image .35s}
+.hrt{padding:72px max(5%,32px) 56px 64px;color:#e9e2d6}.hrt .en{color:var(--gold)}
+.hrt h2{font-size:clamp(34px,3.4vw,52px);line-height:1.12;font-weight:500}
+.hrt p{font-size:17px}.hrth{margin-top:40px}
+.hrth button{background:none;border:0;padding:0;text-align:left;color:#e9e2d6;cursor:pointer;font:inherit}
+.hrth img{height:110px;border-radius:2px;border:1px solid #ffffff22;opacity:.8;transition:var(--ease)}
+.hrth button.on img,.hrth button:hover img{opacity:1;border-color:var(--gold)}.hrth span{font-size:14px}
+/* restaurant */
+.hres2{background-size:cover;background-position:center;color:#f3ebdf;padding:120px max(5%,24px);display:block}
+.hres2>div{max-width:560px}.hres2 .en{color:var(--gold)}.hres2 h2{font-size:clamp(34px,4vw,56px);color:#fff;font-weight:500;margin:8px 0 16px}.hres2 p{font-size:18px;line-height:1.8;margin-bottom:28px}
+/* meetings */
+.hmeet2{display:grid;grid-template-columns:1.1fr 1fr .8fr;padding:0;background:var(--ivory);align-items:center}
+.hmi{min-height:480px;background:center/cover}.hmt{padding:64px 48px}.hmt h2{font-size:clamp(32px,3.2vw,48px);line-height:1.12;font-weight:500;margin:8px 0 16px}.hmt p{color:#6b6157;line-height:1.8;margin-bottom:26px}
+.lnk{display:inline-block;margin-left:18px;color:#8a6a35;border-bottom:1px solid var(--gold);padding-bottom:2px}
+.hm4{list-style:none;padding:0 48px 0 32px;border-left:1px solid #e3d8c5;display:grid;gap:28px}
+.hm4 li{display:flex;gap:14px;align-items:center;font-size:16px}.hm4 b{font-weight:600}
+/* location */
+.hloc2{display:grid;grid-template-columns:1fr 1fr;gap:56px;max-width:1320px;margin:0 auto;padding:96px max(3%,24px);align-items:center}
+.hloc2 h2{font-size:clamp(32px,3.2vw,48px);line-height:1.12;font-weight:500;margin:8px 0 16px}.hloc2 p{color:#6b6157;line-height:1.8}
+.hl4{list-style:none;padding:0;margin:28px 0 32px;display:grid;grid-template-columns:1fr 1fr;gap:16px 24px}.hl4 li{display:flex;gap:12px;align-items:center}
+.hloc2 .hmap{height:380px;border-radius:6px;border:1px solid #e3d8c5}.hloc2 iframe{filter:saturate(.75) sepia(.15)}
+/* footer */
+footer{background:var(--navy);color:#cfd5dc}footer h4{color:var(--gold)}.copy{border-color:#ffffff1a}
+.flang button{background:none;border:0;color:#cfd5dc;cursor:pointer;font:inherit;padding:0}.flang{display:flex;gap:14px}
+/* event modal */
+.evf{position:relative;max-width:560px}.evf .x{position:absolute;top:12px;right:18px;font-size:26px;cursor:pointer}.evf select{font:inherit;padding:14px;border:1.5px solid #eadfcc;border-radius:6px}
+.ok.warn{background:#fdf4e3;color:#7a5520;border-color:#ecd7ad}
+.dish .price,.price{color:#8a6a35}
+@media(max-width:1100px){.hmeet2{grid-template-columns:1fr 1fr}.hm4{grid-column:1/-1;border:0;padding:0 48px 56px;grid-template-columns:1fr 1fr}}
+@media(max-width:900px){nav{padding:12px 16px}.hero{padding-top:64px}
+ .hh{min-height:auto}.hh .in{padding:48px 16px 110px}.hh:before{background:linear-gradient(#0B1B2Acc,#0B1B2A66 60%,#0B1B2Acc)}
+ .hbook{width:auto;margin:-70px 16px 0}.hbook label,.gsel{flex:1 1 100%;border-right:0;border-bottom:1px solid #f0e8da;padding:12px 0}.gpop{left:0;right:0}
+ .hf{grid-template-columns:1fr 1fr;gap:32px 0;padding:48px 16px}.hf>div{border:0;padding:0 10px}
+ .hrooms,.hmeet2,.hloc2{grid-template-columns:1fr}.hri,.hmi{min-height:300px}.hrt,.hmt{padding:44px 16px}.hrth{grid-template-columns:1fr 1fr}
+ .hres2{padding:80px 16px;background-image:linear-gradient(#1c130fdd,#1c130fdd),url(img/h/37.jpg)!important}.hm4{padding:0 16px 48px;grid-template-columns:1fr}.hloc2{padding:64px 16px;gap:28px}.hloc2 .hmap{height:300px}.lnk{display:block;margin:16px 0 0}}
+.hmeet2 .hm4{color:var(--txt);max-width:none;justify-self:stretch;grid-template-columns:1fr}
+.hloc2 .hl4 span{display:inline;width:auto;height:auto;margin:0;background:none;border-radius:0;font-size:16px}
+.hloc2 .hl4{text-align:left}
+@media(max-width:1100px){.hmeet2 .hm4{grid-template-columns:1fr 1fr}}@media(max-width:900px){.hmeet2 .hm4{grid-template-columns:1fr}}
