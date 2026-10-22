@@ -466,3 +466,6 @@ body[data-page=home] nav .links a{font-size:15.5px;font-weight:500;margin:0 13px
  .hx2{position:relative;left:auto;right:auto;bottom:auto;margin:0 16px;padding:8px 18px 18px}.hx2 label,.hx2 .gsel{padding:12px 0;border-right:0}.hx2>.btn{margin:12px 0 0;width:100%}}
 @media(min-width:901px){body[data-page=home] nav .links{order:1}body[data-page=home] .hdx{order:2;border-left:1px solid #ffffff40;margin-left:24px;padding:0 6px 0 30px;gap:24px}body[data-page=home] .lang{order:3;margin-right:26px}body[data-page=home] nav>.btn{order:4}body[data-page=home] .logo{order:0}}
 .hx .sub{font-family:var(--ui)}
+body[data-page=home] .hh .btn.ghost{background:rgba(11,27,42,.55);border:1px solid rgba(243,239,231,.75);height:64px;padding:0 44px;font-size:19px}
+body[data-page=home] .hh .btn.ghost:hover{background:rgba(11,27,42,.8)}
+body[data-page=home] nav>.btn{height:58px;padding:0 34px;font-size:18px}

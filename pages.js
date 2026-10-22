@@ -168,7 +168,7 @@ const pg=document.body.dataset.page;let cat=-1;
 
 function shell(title,bg){return `<header class="hero phero" style="background-image:linear-gradient(90deg,#1a0f08ee,#1a0f0888 60%,#0004),url(${U+bg}?w=1800)">
 <nav><a class="logo" href="index.html"><i class="mk">${MARK}</i><span>BUSINESS HOTEL<br>ALMATY</span></a>
-<div class="links">${[["index","n1"],["rooms","nr"],["menu","n2"],["banquet","n3"],["services","n4"],["contact","n5"]].map(([p,k])=>`<a href="${p}.html" class="${p==pg?"on":""}" data-t="${k}"></a>`).join("")}</div>
+<div class="links">${[["index","n1"],["rooms","nr"],["menu","n2"],["banquet","n3"],["services","n4"],["contact","n5"]].map(([p,k])=>`<a href="${p}.html" class="${p==pg||(p=="index"&&pg=="home")?"on":""}" data-t="${k}"></a>`).join("")}</div>
 <div class="lang">${["zh","ru","en","kz"].map(l=>`<button data-l="${l}">${l=="zh"?"中文":l.toUpperCase()}</button>`).join("")}</div>
 <span class="hdx"><a class="hsr" href="rooms.html" aria-label="search">${IC.search}</a><span class="gl">${IC.globe}</span></span><a class="btn hbk" href="${pg=="home"?"#book":"contact.html#res"}"><span data-t="cta"></span> <span class="arw">→</span></a></nav>
 <div class="in"><div class="en">Business Hotel Almaty</div><h1>${title}</h1><div class="crumb"><a href="index.html" data-t="n1"></a> / ${title}</div></div></header>`}
@@ -179,7 +179,7 @@ const foot=`<footer><div class="fg"><div><div class="logo" style="color:#fff"><i
 <div class="copy"><span>© ${new Date().getFullYear()} Business Hotel Almaty</span><span data-t="pr"></span></div></footer>`;
 
 const views={
- home:()=>shell("","").replace(/url\([^)]*\)/,"url(img/h/28.jpg)").replace(/style="[^"]*"/,`style="background-image:url(img/h/28.jpg)"`).replace("hero phero","hero hh hx").replace(/<div class="in">[\s\S]*<\/header>/,`<div class="in"><div class="en">Business Hotel · Almaty</div><h1>${HX("t1")}</h1><p class="sub">${HX("t2")}</p>
+ home:()=>shell("","").replace(/url\([^)]*\)/,"url(img/h/28.jpg)").replace(/style="[^"]*"/,`style="background-image:url(img/hero-4k.jpg)"`).replace("hero phero","hero hh hx").replace(/<div class="in">[\s\S]*<\/header>/,`<div class="in"><div class="en">Business Hotel · Almaty</div><h1>${HX("t1")}</h1><p class="sub">${HX("t2")}</p>
  <div class="hb"><a class="btn ghost" href="rooms.html">${HX("rooms")} <span class="arw">→</span></a></div></div>
  <form class="hbook hx2" id="book" onsubmit="return goBook(this)">
   <label>${IC.cal}<div><small>${hq("ci")}</small><b class="dv" data-for="ci">${HX("pick")}</b></div>${IC.chev}<input type="date" name="ci" aria-label="${hq("ci")}"></label>
@@ -248,7 +248,7 @@ function openD(i){const d=M[i];mod.innerHTML=`<div class="box">${img(d[0],900)}<
 function render(){if(views[pg]){root.innerHTML=views[pg]()+foot;bind()}setL(document.documentElement.lang);burger();bkInit();{const q=new URLSearchParams(location.search),ta=document.querySelector(".rv-f textarea");if(ta&&q.get("room")){const x=RM.find(r=>r.id==q.get("room"));ta.value=`${x?x.n[LI[document.documentElement.lang]]:q.get("room")} · ${q.get("ci")} → ${q.get("co")} · ${q.get("ad")}+${q.get("ch")}`;const d=document.querySelector(".rv-f input[type=date]");if(d)d.value=q.get("ci")}}document.querySelectorAll(".flang button").forEach(b=>b.onclick=()=>{document.documentElement.lang=b.dataset.l;render()})}
 function burger(){const n=document.querySelector("nav");if(!n||n.querySelector(".bur"))return;const b=document.createElement("button");b.className="bur";b.setAttribute("aria-label","menu");b.innerHTML="<i></i><i></i><i></i>";b.onclick=()=>n.classList.toggle("open");n.appendChild(b)}
 function bind(){document.querySelectorAll(".lang button").forEach(b=>b.onclick=()=>{document.documentElement.lang=b.dataset.l;render()})}
-let s0;try{s0=localStorage.lang}catch(e){}document.documentElement.lang=D[s0]?s0:"zh";
+let s0;try{s0=localStorage.lang}catch(e){}document.documentElement.lang=D[s0]?s0:"ru";
 if(!views[pg])bind();render();
 
 addEventListener("scroll",()=>{const n=document.querySelector("nav");n&&n.classList.toggle("sc",scrollY>40)},{passive:true});
