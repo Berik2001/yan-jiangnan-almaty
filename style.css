@@ -209,3 +209,41 @@ html,body{overflow-x:hidden;max-width:100%}img{max-width:100%}@media(max-width:9
  nav .links{position:absolute;top:100%;left:16px;right:16px;width:auto;margin:0}
 }
 @media(max-width:380px){.logo span{display:none}}
+/* rooms */
+.psub{font-size:20px;margin-top:6px;opacity:.9}
+.rsearch{display:flex;align-items:center;gap:0;background:#fff;border-radius:14px;padding:14px 18px;box-shadow:0 12px 36px #0000001c;margin:-110px 0 40px;position:relative;flex-wrap:wrap}
+.rsearch label{flex:1;display:flex;gap:14px;align-items:center;padding:6px 20px;border-right:1px solid #eee;min-width:200px}
+.rsearch label>span{font-size:24px;color:var(--gold)}.rsearch small{display:block;color:var(--mut);font-size:12px}
+.rsearch b{font-weight:500;font-size:15px}.rsearch input,.rsearch select{border:0;font:inherit;background:none;color:var(--txt);max-width:130px}
+.rsearch .btn{margin-left:14px;padding:16px 34px}
+.rbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.rbar h2{font-size:24px}
+.rbar select{font:inherit;padding:10px 14px;border:1px solid #e3d6c2;border-radius:8px;background:#fff;margin-left:10px}
+.room{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,2fr) 230px;gap:26px;background:#fff;border-radius:14px;padding:14px;box-shadow:0 4px 20px #0000000d;margin-bottom:18px;transition:.3s}
+.room:hover{box-shadow:0 14px 40px #0000001f}
+.rg{display:grid;grid-template-columns:3fr 1fr;gap:8px;height:250px}
+.rmain{border-radius:10px;background:center/cover;position:relative;cursor:zoom-in;transition:background-image .3s}
+.rmain span{position:absolute;left:52px;bottom:14px;background:#000a;color:#fff;font-size:13px;padding:4px 12px;border-radius:20px}
+.rmain button{position:absolute;bottom:10px;width:32px;height:32px;border-radius:50%;border:0;background:#fffe;font-size:20px;cursor:pointer;line-height:1;box-shadow:0 2px 8px #0003}
+.rmain button:first-child{left:12px}.rmain button:last-of-type{right:12px}
+.rth{display:grid;gap:8px}.rth img{width:100%;height:100%;min-height:0;object-fit:cover;border-radius:8px;cursor:pointer;opacity:.75;transition:.25s;border:2px solid transparent}
+.rth img:hover,.rth img.on{opacity:1;border-color:var(--gold)}
+.rinfo{padding:6px 0}.rinfo em{font-style:normal;font-size:12px;background:#f6e6c6;color:#7a5520;padding:4px 10px;border-radius:6px}
+.rinfo h3{font-size:26px;margin:10px 0 6px}.rinfo p{color:#6b5a4c;line-height:1.7;font-size:15px}
+.rsp{display:flex;gap:22px;margin:16px 0 12px;font-size:14px;flex-wrap:wrap}
+.ram{display:flex;gap:8px 16px;flex-wrap:wrap;font-size:13px;color:var(--mut)}
+.rpr{border-left:1px solid #f0e6d6;padding:10px 6px 10px 24px;display:flex;flex-direction:column;justify-content:center;gap:10px}
+.rpr small{color:var(--mut)}.rpr b{font:600 32px "Cormorant Garamond";color:var(--dark);margin-bottom:6px}
+.rpr .btn{align-self:stretch;border-radius:8px;background:linear-gradient(135deg,#c79a55,#a8783a);color:#fff;text-shadow:none}
+.rpr .out{font:inherit;padding:12px;border:1.5px solid var(--gold);background:#fff;border-radius:8px;cursor:pointer;transition:.25s}.rpr .out:hover{background:#fbf3e4}
+.rbox{max-width:900px}.rbig{height:460px;background:center/cover;position:relative}
+.rbig button{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:0;background:#fffe;font-size:26px;cursor:pointer}
+#pv{left:14px}#nx{right:14px}.rbig .x{position:absolute;top:10px;right:16px;color:#fff;font-size:34px;text-shadow:0 2px 8px #000}
+.rstrip{display:flex;gap:6px;padding:8px;background:#1d1611;overflow-x:auto}.rstrip img{width:90px;height:60px;object-fit:cover;border-radius:4px;opacity:.6;cursor:pointer}.rstrip img.on{opacity:1;outline:2px solid var(--gold)}
+.hgal{columns:4 220px;column-gap:12px}.hgal img{width:100%;margin-bottom:12px;border-radius:10px;cursor:zoom-in;transition:.3s;display:block}.hgal img:hover{transform:scale(1.02);box-shadow:0 10px 30px #0003}
+@media(max-width:1100px){.room{grid-template-columns:1fr 1fr}.rpr{grid-column:1/-1;border-left:0;border-top:1px solid #f0e6d6;flex-direction:row;align-items:center;flex-wrap:wrap;padding:14px 0 0}.rpr b{margin:0 auto 0 0}}
+@media(max-width:900px){.rsearch{margin-top:-50px;padding:8px 16px}.rsearch label{flex:1 1 100%;border-right:0;border-bottom:1px solid #f0e6d6;padding:12px 0}.rsearch .btn{margin:12px 0 0;width:100%}
+ .room{grid-template-columns:1fr;padding:10px}.rg{height:230px}.rinfo h3{font-size:22px}.rpr{flex-direction:column;align-items:stretch}.rpr b{margin:0}
+ .rbar h2{font-size:19px}.rbig{height:300px}.psub{font-size:15px}.hgal{columns:2}}
+.rg{overflow:hidden}.rth{grid-template-rows:repeat(3,minmax(0,1fr));height:100%}
+.rsearch b{display:flex;align-items:center;gap:6px}.rsearch input[type=date]{max-width:118px}
+body[data-page=rooms] .phero{background-position:center 35%}

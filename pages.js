@@ -43,13 +43,46 @@ const M=[["photo-1525755662778-989d0524087e",3900,1,1,1,"宫保鸡丁","Гунб
  ["photo-1617093727343-374698b1b08d",2000,0,1,0,"拍黄瓜","Огурцы по-китайски","Smashed Cucumber","Қытайша қияр"],
  ["photo-1541696432-82c6da8ce7bf",4800,1,0,0,"糖醋里脊","Свинина в кисло-сладком","Sweet & Sour Pork","Тәтті-қышқыл ет"],
  ["photo-1626804475297-41608ea09aeb",3600,0,0,1,"口水鸡","Курица «Слюнки текут»","Mouthwatering Chicken","«Сілекей» тауығы"]];
+
+// Rooms: [photos, price, guests, m2, beds-key, badge, zh, ru, en, kz, desc zh/ru/en/kz, amenities]
+const RM=[
+ [[45,46,47,43,17],45000,2,25,"b2",1,"标准双床房","Стандартный Twin","Standard Twin","Стандарт Twin",["适合商务出行的舒适客房，两张单人床，现代内饰。","Уютный номер для деловых поездок: две отдельные кровати и современный интерьер.","A cozy room for business trips. Two separate beds and a modern interior.","Іссапарға ыңғайлы бөлме: екі бөлек төсек және заманауи интерьер."],["wifi","ac","bath","tv","desk"]],
+ [[40,42,25,18],50000,2,30,"b1",0,"豪华大床房","Делюкс Double","Deluxe Double","Делюкс Double",["大理石墙面与深蓝色调，宽敞舒适的大床。","Мраморные стены и глубокий синий: просторно, стильно и тихо.","Marble walls and deep navy tones. Spacious, stylish and quiet.","Мәрмәр қабырға мен қою көк түс: кең әрі сәнді."],["wifi","ac","bath","tv","desk"]],
+ [[41,21,19],50000,2,25,"b1",0,"阳台大床房","Double с балконом","Double with Balcony","Балконы бар Double",["带阳台的浪漫之选，享受新鲜空气与城市景观。","Романтичный вариант с балконом и видом на город.","A romantic option with a balcony, fresh air and city views.","Балконы бар романтикалық нұсқа, қала көрінісі."],["wifi","ac","bath","tv","balcony"]],
+ [[15,43,18,13],48000,2,24,"b1",0,"经典大床房","Классический Double","Classic Double","Классикалық Double",["经典欧式壁纸与温馨灯光，安静休息之所。","Классические обои, тёплый свет — место для спокойного отдыха.","Classic damask walls and warm lighting for a restful stay.","Классикалық тұсқағаз бен жылы жарық — тыныш демалыс."],["wifi","ac","bath","tv","desk"]],
+ [[38,20,25],65000,4,40,"b3",0,"家庭房","Семейный номер","Family Room","Отбасылық бөлме",["双床加沙发区，适合家庭与朋友同住。","Две кровати и зона отдыха — для семьи и друзей.","Two beds plus a lounge area, ideal for families and friends.","Екі төсек және демалыс аймағы — отбасыға арналған."],["wifi","ac","bath","tv","sofa"]],
+ [[44,39,16,19],80000,2,45,"b1",2,"行政套房","Полулюкс","Junior Suite","Жартылай люкс",["全景落地窗、休息区与双洗手盆浴室。","Панорамные окна, гостиная зона и ванная с двумя раковинами.","Panoramic windows, a lounge area and a double-sink bathroom.","Панорамалық терезе, қонақ аймағы және екі раковиналы ванна."],["wifi","ac","bath","tv","sofa"]]];
+const AM={wifi:["📶","免费Wi-Fi","Wi-Fi","Free Wi-Fi","Тегін Wi-Fi"],ac:["❄️","空调","Кондиционер","Air conditioning","Кондиционер"],bath:["🛁","独立卫浴","Своя ванная","Private bathroom","Жеке ванна"],tv:["📺","电视","ТВ","TV","ТД"],desk:["💼","办公桌","Рабочее место","Workspace","Жұмыс орны"],balcony:["🌿","阳台","Балкон","Balcony","Балкон"],sofa:["🛋","沙发区","Зона отдыха","Lounge area","Демалыс аймағы"]};
+const RS={nr:["客房","Номера","Rooms","Бөлмелер"],rT:["客房与价格","Номера и цены","Rooms & Rates","Бөлмелер мен бағалар"],rSub:["为您的入住找到理想客房","Найдите идеальный номер для вашего отдыха","Find the perfect room for your stay","Демалысыңызға мінсіз бөлмені табыңыз"],
+ ci:["入住 — 退房","Заезд — выезд","Check-in — Check-out","Кіру — шығу"],gu:["人数","Гости","Guests","Қонақтар"],ad:["2位成人","2 взрослых","2 adults","2 ересек"],sr:["优惠价格","Тарифы","Special rates","Тарифтер"],best:["最优价格","Лучшая цена","Best available rates","Ең жақсы баға"],mod:["更新搜索","Изменить поиск","Modify search","Іздеуді өзгерту"],
+ found:["间客房","номеров найдено","rooms found","бөлме табылды"],sort:["排序","Сортировка","Sort by","Сұрыптау"],rec:["推荐","Рекомендуемые","Recommended","Ұсынылған"],lo:["价格从低到高","Сначала дешевле","Price: low to high","Арзанынан"],hi:["价格从高到低","Сначала дороже","Price: high to low","Қымбатынан"],
+ from:["起 / 晚","от / ночь","From / night","бастап / түн"],sel:["选择客房","Выбрать номер","Select room","Бөлмені таңдау"],det:["查看详情","Подробнее","View details","Толығырақ"],
+ bd:[["人","гостя","guests","қонақ"]],b1:["1张大床","1 большая кровать","1 large bed","1 үлкен төсек"],b2:["2张单人床","2 односпальные","2 single beds","2 бір кісілік"],b3:["2床 + 沙发","2 кровати + диван","2 beds + sofa","2 төсек + диван"],
+ pop:["最受欢迎","Популярный","Most popular","Танымал"],lux:["最佳景观","Лучший вид","Best view","Үздік көрініс"],
+ galT:["酒店环境","Атмосфера отеля","Hotel gallery","Қонақ үй атмосферасы"]};
+["zh","ru","en","kz"].forEach((l,i)=>D[l].nr=RS.nr[i]);
+const r=k=>RS[k][LI[document.documentElement.lang]];let rSort=0,rIdx={};
+const GAL=[28,27,11,12,33,30,31,32,24,14,36,37,23,22,26,34,35,13];
+function rcard(x){const i=RM.indexOf(x),k=rIdx[i]||0,ph=x[0];return `<div class="room">
+ <div class="rg"><div class="rmain" style="background-image:url(img/h/${ph[k]}.jpg)" onclick="rDet(${i})"><button onclick="event.stopPropagation();rSl(${i},-1)">‹</button><span>${k+1} / ${ph.length}</span><button onclick="event.stopPropagation();rSl(${i},1)">›</button></div>
+ <div class="rth">${ph.slice(0,3).map((p,j)=>`<img src="img/h/${p}.jpg" loading="lazy" class="${j==k?"on":""}" onclick="rIdx[${i}]=${j};render()">`).join("")}</div></div>
+ <div class="rinfo">${x[5]?`<em>${x[5]==1?r("pop"):r("lux")}</em>`:""}<h3>${x[6+LI[document.documentElement.lang]]}</h3><p>${x[10][LI[document.documentElement.lang]]}</p>
+ <div class="rsp"><span>👤 ${x[2]} ${RS.bd[0][LI[document.documentElement.lang]]}</span><span>📐 ${x[3]} m²</span><span>🛏 ${r(x[4])}</span></div>
+ <div class="ram">${x[11].map(a=>`<span>${AM[a][0]} ${AM[a][1+LI[document.documentElement.lang]]}</span>`).join("")}</div></div>
+ <div class="rpr"><small>${r("from")}</small><b>${x[1].toLocaleString("ru")} ₸</b><a class="btn" href="contact.html#res">${r("sel")} →</a><button class="out" onclick="rDet(${i})">${r("det")}</button></div></div>`}
+function rSl(i,d){const n=RM[i][0].length;rIdx[i]=((rIdx[i]||0)+d+n)%n;render()}
+function rDet(i){const x=RM[i];let k=rIdx[i]||0;const m=document.getElementById("mod");
+ const draw=()=>{m.innerHTML=`<div class="box rbox"><div class="rbig" style="background-image:url(img/h/${x[0][k]}.jpg)"><span class="x" onclick="mod.classList.remove('on')">×</span><button id="pv">‹</button><button id="nx">›</button></div><div class="rstrip">${x[0].map((p,j)=>`<img src="img/h/${p}.jpg" data-j="${j}" class="${j==k?"on":""}">`).join("")}</div><div class="b"><h2>${x[6+LI[document.documentElement.lang]]}</h2><p style="margin:8px 0;color:#6b5a4c">${x[10][LI[document.documentElement.lang]]}</p><div class="ram">${x[11].map(a=>`<span>${AM[a][0]} ${AM[a][1+LI[document.documentElement.lang]]}</span>`).join("")}</div><div class="price" style="font-size:24px;margin:14px 0">${x[1].toLocaleString("ru")} ₸ <small style="color:var(--mut);font-size:13px">${r("from")}</small></div><a class="btn" href="contact.html#res">${r("sel")} →</a></div></div>`;
+ pv.onclick=()=>{k=(k-1+x[0].length)%x[0].length;draw()};nx.onclick=()=>{k=(k+1)%x[0].length;draw()};m.querySelectorAll(".rstrip img").forEach(im=>im.onclick=()=>{k=+im.dataset.j;draw()})};
+ draw();m.classList.add("on")}
+function lb(p){mod.innerHTML=`<div class="box rbox"><div class="rbig" style="background-image:url(img/h/${p}.jpg);height:70vh"><span class="x" onclick="mod.classList.remove('on')">×</span></div></div>`;mod.classList.add("on")}
 const t=k=>S[k][LI[document.documentElement.lang]],nm=a=>a[LI[document.documentElement.lang]];
 const img=(id,w=700)=>`<img src="${U+id}?w=${w}" loading="lazy" onerror="this.onerror=null;this.src='${FB}'">`;
 const pg=document.body.dataset.page;let cat=-1;
 
 function shell(title,bg){return `<header class="hero phero" style="background-image:linear-gradient(90deg,#1a0f08ee,#1a0f0888 60%,#0004),url(${U+bg}?w=1800)">
 <nav><a class="logo" href="index.html"><i><b>宴</b></i><span>YAN JIANGNAN<br>ALMATY</span></a>
-<div class="links">${[["index","n1"],["menu","n2"],["banquet","n3"],["services","n4"],["contact","n5"]].map(([p,k])=>`<a href="${p}.html" class="${p==pg?"on":""}" data-t="${k}"></a>`).join("")}</div>
+<div class="links">${[["index","n1"],["rooms","nr"],["menu","n2"],["banquet","n3"],["services","n4"],["contact","n5"]].map(([p,k])=>`<a href="${p}.html" class="${p==pg?"on":""}" data-t="${k}"></a>`).join("")}</div>
 <div class="lang">${["zh","ru","en","kz"].map(l=>`<button data-l="${l}">${l=="zh"?"中文":l.toUpperCase()}</button>`).join("")}</div>
 <a class="btn" href="contact.html#res" data-t="cta"></a></nav>
 <div class="in"><div class="en">Yan Jiangnan · Almaty</div><h1>${title}</h1><div class="crumb"><a href="index.html" data-t="n1"></a> / ${title}</div></div></header>`}
@@ -59,6 +92,17 @@ const foot=`<footer><div class="fg"><div><div class="logo" style="color:#fff"><i
 <div><h4 data-t="fl"></h4><ul><li>WeChat · Instagram · WhatsApp</li></ul></div></div><div class="copy"><span>© 2026 Yan Jiangnan Almaty</span><span data-t="pr"></span></div></footer>`;
 
 const views={
+ rooms:()=>shell(r("rT"),"").replace(/url\([^)]*\)/,"url(img/h/28.jpg)").replace("</h1>",`</h1><p class="psub">${r("rSub")}</p>`)+`
+ <div class="wrap"><form class="rsearch" onsubmit="location.href='contact.html#res';return false">
+  <label><span>📅</span><div><small>${r("ci")}</small><b><input type="date" value="2026-11-08"> — <input type="date" value="2026-11-27"></b></div></label>
+  <label><span>👤</span><div><small>${r("gu")}</small><b><select><option>${r("ad")}</option><option>1</option><option>3</option><option>4</option></select></b></div></label>
+  <label><span>🏷</span><div><small>${r("sr")}</small><b>${r("best")}</b></div></label>
+  <button class="btn">${r("mod")} →</button></form>
+ <div class="rbar"><h2>${RM.length} ${r("found")}</h2><label>${r("sort")} <select onchange="rSort=+this.value;render()">${["rec","lo","hi"].map((s,i)=>`<option value="${i}" ${i==rSort?"selected":""}>${r(s)}</option>`).join("")}</select></label></div>
+ ${[...RM].sort((a,b)=>rSort==1?a[1]-b[1]:rSort==2?b[1]-a[1]:0).map(rcard).join("")}
+ <div class="head" style="margin-top:60px"><h2>${r("galT")}</h2><div class="en">Business Hotel Almaty</div></div>
+ <div class="hgal">${GAL.map(p=>`<img src="img/h/${p}.jpg" loading="lazy" onclick="lb(${p})">`).join("")}</div></div>
+ <div class="modal" id="mod" onclick="if(event.target==this)this.classList.remove('on')"></div>`,
  menu:()=>shell(t("menuT"),"photo-1552566626-52f8b828add9")+`<div class="wrap"><div class="head"><h2 data-t="m1"></h2><div class="en">Our Menu</div></div>
  <div class="tabs">${[t("all"),...S.cats.map(nm)].map((c,i)=>`<button class="${i-1==cat?"on":""}" onclick="cat=${i-1};render()">${c}</button>`).join("")}</div>
  <div class="grid">${M.map((d,i)=>[d,i]).filter(([d])=>cat<0||d[2]==cat).map(([d,i])=>`<div class="dish" onclick="openD(${i})"><div class="im">${img(d[0],500)}</div><div class="b"><div class="zh">${d[5]}</div><h3>${d[5+LI[document.documentElement.lang]]}${d[4]?`<span class="tag">★ ${t("hot")}</span>`:""}${d[3]?`<span class="tag">🌶 ${t("spicy")}</span>`:""}</h3><div class="price">${d[1].toLocaleString()} ₸<span class="arr">→</span></div></div></div>`).join("")}</div></div>
