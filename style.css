@@ -247,3 +247,4 @@ html,body{overflow-x:hidden;max-width:100%}img{max-width:100%}@media(max-width:9
 .rg{overflow:hidden}.rth{grid-template-rows:repeat(3,minmax(0,1fr));height:100%}
 .rsearch b{display:flex;align-items:center;gap:6px}.rsearch input[type=date]{max-width:118px}
 body[data-page=rooms] .phero{background-position:center 35%}
+.rth{display:flex;flex-direction:column}.rth img{flex:1 1 0;height:0;min-height:0}
