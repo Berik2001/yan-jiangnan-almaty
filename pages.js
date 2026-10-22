@@ -113,12 +113,13 @@ const HS={t1:["阿拉木图的<br>理想商务下榻之地","Идеальный 
  min:["分钟","мин","min","мин"],det:["详细位置","Маршрут","Directions","Бағыт"],cen:["阿拉木图市中心","Центр Алматы","Central Almaty","Алматы орталығы"]};
 const h=k=>HS[k][LI[document.documentElement.lang]],L=()=>LI[document.documentElement.lang];
 
-const MARK=`<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 3l17 17-17 17L3 20z"/><path d="M20 10l10 10-10 10-10-10z"/><path d="M14 14l12 12M26 14L14 26"/></svg>`;
+const MARK=`<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><g transform="rotate(45 20 20)"><rect x="9" y="9" width="22" height="22"/><path d="M9 16h22M9 24h22M16 9v22M24 9v22"/><path d="M9 16a3.5 3.5 0 0 1 0-7h0M31 24a3.5 3.5 0 0 1 0 7M16 31a3.5 3.5 0 0 1-7 0M24 9a3.5 3.5 0 0 1 7 0"/></g></svg>`;
 const sv=d=>`<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
 const IC={pin:sv('<path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>'),dish:sv('<path d="M3 17h18M5 17a7 7 0 0 1 14 0M12 8V6M10 6h4M4 20h16"/>'),bed:sv('<path d="M3 18v-7h18v7M3 18v2M21 18v2M5 11V7h14v4M8 11V9h3v2M13 11V9h3v2"/>'),people:sv('<circle cx="12" cy="7" r="3"/><circle cx="5" cy="9" r="2"/><circle cx="19" cy="9" r="2"/><path d="M7 20v-2a5 5 0 0 1 10 0v2M2 19v-1a3 3 0 0 1 4-2.8M22 19v-1a3 3 0 0 0-4-2.8"/>'),
  cal:sv('<rect x="3" y="5" width="18" height="16" rx="1"/><path d="M3 10h18M8 3v4M16 3v4"/>'),user:sv('<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>'),venue:sv('<path d="M4 21V9l8-5 8 5v12M9 21v-6h6v6M3 21h18"/>'),screen:sv('<rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/>'),support:sv('<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/>'),tailor:sv('<path d="M4 20l6-6M14 4l6 6-8 8-6-6z"/><path d="M14 8l2 2"/>'),
  plane:sv('<path d="M2 16l20-8-6 12-3-5-5 3z"/>'),city:sv('<path d="M3 21h18M5 21V8h6v13M11 21V3h8v18M7 11h2M7 14h2M14 7h2M14 10h2M14 13h2"/>'),bag:sv('<path d="M5 8h14l-1 13H6zM9 8V6a3 3 0 0 1 6 0v2"/>'),mountain:sv('<path d="M2 20l7-12 4 6 3-4 6 10z"/>')};
 Object.assign(IC,{wifi:sv('<path d="M2 9a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19.5" r=".8"/>'),ac:sv('<rect x="3" y="5" width="18" height="8" rx="1"/><path d="M7 17v2M12 17v3M17 17v2M7 10h10"/>'),bath:sv('<path d="M3 12h18v3a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5zM6 12V5a2 2 0 0 1 4 0M7 20l-1 2M17 20l1 2"/>'),tv:sv('<rect x="3" y="5" width="18" height="12" rx="1"/><path d="M9 21h6"/>'),desk:sv('<rect x="3" y="7" width="18" height="12" rx="1"/><path d="M9 7V5h6v2M3 12h18"/>'),balc:sv('<path d="M4 21V10M20 21V10M4 14h16M8 14v7M12 14v7M16 14v7M6 10V4h12v6"/>'),sofa:sv('<path d="M4 11V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3M2 13a2 2 0 0 1 4 0v2h12v-2a2 2 0 0 1 4 0v5H2zM5 18v2M19 18v2"/>'),area:sv('<path d="M4 20V4M4 20h16M8 16l8-8M12 8h4v4"/>'),beds:sv('<path d="M3 18v-6h18v6M3 18v2M21 18v2M5 12V8h14v4"/>'),edit:sv('<path d="M4 20h4L19 9l-4-4L4 16z"/>'),tag:sv('<path d="M3 12V3h9l9 9-9 9z"/><circle cx="7.5" cy="7.5" r="1.3"/>'),chev:sv('<path d="M6 9l6 6 6-6"/>')});
+Object.assign(IC,{search:sv('<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>'),globe:sv('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>')});
 const DIR="https://www.google.com/maps/dir/?api=1&destination=Business+Hotel+Almaty";
 // Integration layer: set endpoints when the hotel's booking engine / CRM is available
 const CONFIG={bookingUrl:null,eventEndpoint:null};
@@ -126,9 +127,12 @@ const iso=d=>d.toISOString().slice(0,10),addD=(s,n)=>{const d=new Date(s);d.setD
 let BK;{const q=new URLSearchParams(location.search);let s={};try{s=JSON.parse(localStorage.bk||"{}")}catch(e){}const td=iso(new Date());
  BK={ci:q.get("ci")||s.ci||td,co:q.get("co")||s.co,ad:+(q.get("ad")||s.ad||2),ch:+(q.get("ch")||s.ch||0)};if(BK.ci<td)BK.ci=td;if(!BK.co||BK.co<=BK.ci)BK.co=addD(BK.ci,1)}
 function saveBk(){try{localStorage.bk=JSON.stringify(BK)}catch(e){}}
-function gLabel(){const b=document.querySelector(".gbtn");if(b)b.textContent=`${BK.ad} ${hq("ad").toLowerCase()}${BK.ch?`, ${BK.ch} ${hq("ch").toLowerCase()}`:""}`;["ad","ch"].forEach(k=>{const e=document.getElementById("g_"+k);if(e)e.textContent=BK[k]})}
+function gLabel(){const b=document.querySelector(".gbtn");if(b)b.textContent=`${BK.ad} ${b.tagName=="B"?HXS.gw[BK.ad==1?1:0][LI[document.documentElement.lang]]:hq("ad").toLowerCase()}${BK.ch?`, ${BK.ch} ${hq("ch").toLowerCase()}`:""}`;["ad","ch"].forEach(k=>{const e=document.getElementById("g_"+k);if(e)e.textContent=BK[k]})}
 function gStep(k,d){BK[k]=Math.max(k=="ad"?1:0,Math.min(8,BK[k]+d));saveBk();gLabel()}
-function bkInit(){const f=document.getElementById("book");if(!f)return;const ci=f.ci,co=f.co,td=iso(new Date());ci.min=td;ci.value=BK.ci;co.min=addD(BK.ci,1);co.value=BK.co;
+function bkInit(){const f=document.getElementById("book");if(!f)return;
+ if(f.classList.contains("hx2")){const loc={zh:"zh-CN",ru:"ru-RU",en:"en-GB",kz:"kk-KZ"}[document.documentElement.lang],show=()=>f.querySelectorAll(".dv").forEach(d=>{const v=f[d.dataset.for].value;d.textContent=v&&f.dataset.touched?new Date(v+"T00:00").toLocaleDateString(loc,{day:"numeric",month:"long"}):HX("pick")});
+  f.querySelectorAll("label").forEach(l=>l.onclick=e=>{const i=l.querySelector("input");try{i.showPicker()}catch(_){i.focus()}});
+  setTimeout(()=>{f.ci.addEventListener("change",()=>{f.dataset.touched=1;show()});f.co.addEventListener("change",()=>{f.dataset.touched=1;show()});show()})}const ci=f.ci,co=f.co,td=iso(new Date());ci.min=td;ci.value=BK.ci;co.min=addD(BK.ci,1);co.value=BK.co;
  ci.onchange=()=>{BK.ci=ci.value;co.min=addD(ci.value,1);if(co.value<=ci.value)co.value=addD(ci.value,1);BK.co=co.value;saveBk()};co.onchange=()=>{BK.co=co.value;saveBk()};gLabel();
  document.addEventListener("click",e=>{const g=document.querySelector(".gsel");if(g&&!g.contains(e.target))g.classList.remove("open")})}
 function goBook(f){BK.ci=f.ci.value;BK.co=f.co.value;saveBk();const q=new URLSearchParams({ci:BK.ci,co:BK.co,ad:BK.ad,ch:BK.ch});location.href=(CONFIG.bookingUrl||"rooms.html")+"?"+q;return false}
@@ -153,6 +157,11 @@ const HQ={t1:["阿拉木图的<br>理想商务下榻之地","Идеальный<
  evt:[["商务会议","Деловая встреча","Business meeting","Іскерлік кездесу"],["大型会议","Конференция","Conference","Конференция"],["婚宴","Свадьба","Wedding","Той"],["宴会/庆典","Банкет / праздник","Banquet / celebration","Банкет / мереке"]],evd:["计划日期","Дата","Planned date","Күні"],
  noint:["在线提交尚未连接。请通过联系页面与我们联系。","Онлайн-отправка ещё не подключена. Свяжитесь с нами через страницу контактов.","Online submission is not connected yet. Please reach us via the contact page.","Онлайн жіберу әлі қосылмаған. Байланыс беті арқылы хабарласыңыз."],sent:["已发送，我们会尽快联系您。","Заявка отправлена.","Request sent.","Өтінім жіберілді."],err:["发送失败，请稍后再试。","Ошибка отправки.","Could not send.","Жіберу қатесі."]};
 const hq=k=>HQ[k][LI[document.documentElement.lang]];
+const HXS={t1:["您在阿拉木图的<br>舒适之选","Ваш комфорт<br>в Алматы","Your comfort<br>in Almaty","Алматыдағы<br>сіздің жайлылығыңыз"],
+ t2:["舒适客房、中式美食<br>与商务会议空间。","Комфортные номера, китайская кухня<br>и пространства для деловых встреч.","Comfortable rooms, Chinese cuisine<br>and spaces for business meetings.","Жайлы бөлмелер, қытай асханасы<br>және іскерлік кездесу орындары."],
+ rooms:["查看客房","Смотреть номера","View rooms","Бөлмелерді көру"],pick:["选择日期","Выберите дату","Select date","Күнді таңдаңыз"],check:["查询空房","Проверить доступность","Check availability","Бос орынды тексеру"],book:["立即预订","Забронировать","Book now","Брондау"],
+ gw:[["位成人","взрослых","adults","ересек"],["位成人","взрослый","adult","ересек"]]};
+const HX=k=>HXS[k][LI[document.documentElement.lang]];
 const t=k=>S[k][LI[document.documentElement.lang]],nm=a=>a[LI[document.documentElement.lang]];
 const img=(id,w=700)=>`<img src="${U+id}?w=${w}" loading="lazy" onerror="this.onerror=null;this.src='${FB}'">`;
 const pg=document.body.dataset.page;let cat=-1;
@@ -161,7 +170,7 @@ function shell(title,bg){return `<header class="hero phero" style="background-im
 <nav><a class="logo" href="index.html"><i class="mk">${MARK}</i><span>BUSINESS HOTEL<br>ALMATY</span></a>
 <div class="links">${[["index","n1"],["rooms","nr"],["menu","n2"],["banquet","n3"],["services","n4"],["contact","n5"]].map(([p,k])=>`<a href="${p}.html" class="${p==pg?"on":""}" data-t="${k}"></a>`).join("")}</div>
 <div class="lang">${["zh","ru","en","kz"].map(l=>`<button data-l="${l}">${l=="zh"?"中文":l.toUpperCase()}</button>`).join("")}</div>
-<a class="btn" href="contact.html#res" data-t="cta"></a></nav>
+<span class="hdx"><a class="hsr" href="rooms.html" aria-label="search">${IC.search}</a><span class="gl">${IC.globe}</span></span><a class="btn hbk" href="${pg=="home"?"#book":"contact.html#res"}"><span data-t="cta"></span> <span class="arw">→</span></a></nav>
 <div class="in"><div class="en">Business Hotel Almaty</div><h1>${title}</h1><div class="crumb"><a href="index.html" data-t="n1"></a> / ${title}</div></div></header>`}
 const foot=`<footer><div class="fg"><div><div class="logo" style="color:#fff"><i class="mk">${MARK}</i><span>BUSINESS HOTEL<br>ALMATY</span></div><p style="margin-top:12px">${hq("brand")}</p></div>
 <div><h4 data-t="q"></h4><ul><li><a href="index.html" data-t="n1"></a></li><li><a href="rooms.html" data-t="nr"></a></li><li><a href="menu.html" data-t="n2"></a></li><li><a href="banquet.html" data-t="n3"></a></li><li><a href="contact.html" data-t="n5"></a></li></ul></div>
@@ -170,14 +179,14 @@ const foot=`<footer><div class="fg"><div><div class="logo" style="color:#fff"><i
 <div class="copy"><span>© ${new Date().getFullYear()} Business Hotel Almaty</span><span data-t="pr"></span></div></footer>`;
 
 const views={
- home:()=>shell("","").replace(/url\([^)]*\)/,"url(img/h/28.jpg)").replace("hero phero","hero hh").replace(/<div class="in">[\s\S]*<\/header>/,`<div class="in"><div class="en">Business Hotel Almaty</div><h1>${hq("t1")}</h1><div class="sub">${hq("t2")}</div>
- <div class="hb"><a class="btn" href="#book">${hq("bk")} →</a><a class="btn ghost" href="rooms.html">${hq("ex")} →</a></div></div></header>`)+`
- <form class="hbook" id="book" onsubmit="return goBook(this)">
-  <label>${IC.cal}<div><small>${hq("ci")}</small><input type="date" name="ci" required></div></label>
-  <label>${IC.cal}<div><small>${hq("co")}</small><input type="date" name="co" required></div></label>
-  <div class="gsel">${IC.user}<div><small>${hq("gs")}</small><button type="button" class="gbtn" onclick="this.parentNode.parentNode.classList.toggle('open')"></button></div>
-   <div class="gpop">${["ad","ch"].map(k=>`<div><span>${hq(k)}</span><button type="button" onclick="gStep('${k}',-1)" aria-label="-">−</button><b id="g_${k}"></b><button type="button" onclick="gStep('${k}',1)" aria-label="+">+</button></div>`).join("")}</div></div>
-  <button class="btn">${hq("chk")} →</button></form>
+ home:()=>shell("","").replace(/url\([^)]*\)/,"url(img/h/28.jpg)").replace(/style="[^"]*"/,`style="background-image:url(img/h/28.jpg)"`).replace("hero phero","hero hh hx").replace(/<div class="in">[\s\S]*<\/header>/,`<div class="in"><div class="en">Business Hotel · Almaty</div><h1>${HX("t1")}</h1><p class="sub">${HX("t2")}</p>
+ <div class="hb"><a class="btn ghost" href="rooms.html">${HX("rooms")} <span class="arw">→</span></a></div></div>
+ <form class="hbook hx2" id="book" onsubmit="return goBook(this)">
+  <label>${IC.cal}<div><small>${hq("ci")}</small><b class="dv" data-for="ci">${HX("pick")}</b></div>${IC.chev}<input type="date" name="ci" aria-label="${hq("ci")}"></label>
+  <label>${IC.cal}<div><small>${hq("co")}</small><b class="dv" data-for="co">${HX("pick")}</b></div>${IC.chev}<input type="date" name="co" aria-label="${hq("co")}"></label>
+  <div class="gsel" onclick="if(!event.target.closest('.gpop'))this.classList.toggle('open')">${IC.user}<div><small>${hq("gs")}</small><b class="gbtn"></b></div>${IC.chev}
+   <div class="gpop">${["ad","ch"].map(k=>`<div><span>${hq(k)}</span><button type="button" onclick="gStep('${k}',-1)">−</button><b id="g_${k}"></b><button type="button" onclick="gStep('${k}',1)">+</button></div>`).join("")}</div></div>
+  <button class="btn">${HX("check")} <span class="arw">→</span></button></form></header>`)+`
  <div class="hf">${["pin","dish","bed","people"].map((ic,i)=>`<div>${IC[ic]}<b>${HQ.f[i][L()]}</b><small>${HQ.f[i][4+L()]}</small></div>`).join("")}</div>
  <section class="hrooms"><div class="hri" id="hri" style="background-image:url(img/h/${RM[0].ph[0]}.jpg)"></div><div class="hrt"><div class="en">${hq("eR")}</div><h2>${hq("rT")}</h2><p>${hq("rD")}</p><a class="btn ghost" href="rooms.html">${hq("rA")} →</a>
   <div class="hrth">${RM.slice(0,4).map((x,i)=>`<button type="button" class="${i?"":"on"}" onclick="hri.style.backgroundImage='url(img/h/${x.ph[0]}.jpg)';this.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('on'));this.classList.add('on')"><img src="img/h/${x.ph[0]}.jpg" loading="lazy" alt=""><span>${x.n[L()]}</span></button>`).join("")}</div></div></section>
