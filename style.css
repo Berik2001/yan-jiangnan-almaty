@@ -412,3 +412,28 @@ button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible{ou
  .rmain2{aspect-ratio:4/3}.rth2{flex-direction:row;overflow-x:auto}.rth2 button{flex:0 0 30%;aspect-ratio:4/3}
  .rinfo2 h3{font-size:24px}.rpr2{flex-direction:column;align-items:stretch}.rpr2 .btn,.rpr2 .out{width:100%}}
 .rs1 b{white-space:nowrap;font-size:16px}.rhero .in{padding-top:40px}
+/* ===== Home first screen: three buttons (Quiet Luxury) ===== */
+.hh nav>.btn,.hh .hb .btn.ghost,.hbook .btn{font-family:var(--ui);font-size:16px;font-weight:600;letter-spacing:.01em;line-height:1;border-radius:6px;box-shadow:none;text-shadow:none;transform:none;white-space:nowrap;max-width:100%;transition:background-color 200ms ease,border-color 200ms ease,color 200ms ease}
+.hh nav>.btn:before,.hh nav>.btn:after,.hh .hb .btn.ghost:before,.hh .hb .btn.ghost:after,.hbook .btn:before,.hbook .btn:after{display:none}
+.hh nav>.btn:hover,.hh nav>.btn:active,.hh .hb .btn.ghost:hover,.hh .hb .btn.ghost:active,.hbook .btn:hover,.hbook .btn:active{transform:none;box-shadow:none}
+.hh nav>.btn{height:48px;padding:0 26px;background:#F3EFE7;color:#12263B;border:1px solid rgba(18,38,59,.08)}
+.hh nav>.btn:hover{background:#E5DFD5}
+.hh .hb .btn.ghost{height:56px;padding:0 32px;background:transparent;color:#F3EFE7;border:1px solid rgba(243,239,231,.75)}
+.hh .hb .btn.ghost:hover{background:rgba(243,239,231,.12);border-color:#F3EFE7;color:#fff}
+.hbook .btn{height:60px;padding:0 36px;background:#10243A;color:#fff;border:0}
+.hbook .btn:hover{background:#1B3B56}
+.hbook .btn:disabled{background:#10243A;opacity:.55;cursor:not-allowed}
+.hh nav>.btn:focus-visible,.hh .hb .btn.ghost:focus-visible{outline:2px solid #F3EFE7;outline-offset:3px}
+.hbook .btn:focus-visible{outline:2px solid #10243A;outline-offset:3px}
+/* Home first-screen buttons — quiet luxury (scoped to homepage) */
+body[data-page=home] nav>.btn,body[data-page=home] .hh .btn.ghost,body[data-page=home] .hbook>.btn{font-family:"Myriad Pro","Source Sans 3",system-ui,sans-serif;font-size:16px;font-weight:600;border-radius:6px;box-shadow:none;text-shadow:none;letter-spacing:.01em;transform:none;transition:background-color 200ms ease,border-color 200ms ease,color 200ms ease}
+body[data-page=home] nav>.btn:before,body[data-page=home] .hh .btn.ghost:before,body[data-page=home] .hbook>.btn:before{display:none}
+body[data-page=home] nav>.btn{background:#F3EFE7;color:#12263B;border:1px solid rgba(18,38,59,.08);height:48px;padding:0 26px;display:inline-flex;align-items:center}
+body[data-page=home] nav>.btn:hover{background:#E5DFD5;transform:none;box-shadow:none}
+body[data-page=home] .hh .btn.ghost{background:transparent;color:#F3EFE7;border:1px solid rgba(243,239,231,.75);height:56px;padding:0 32px;display:inline-flex;align-items:center}
+body[data-page=home] .hh .btn.ghost:hover{background:rgba(243,239,231,.12);border-color:#F3EFE7;color:#fff;transform:none;box-shadow:none}
+body[data-page=home] .hbook>.btn{background:#10243A;color:#fff;border:none;height:60px;display:inline-flex;align-items:center;justify-content:center}
+body[data-page=home] .hbook>.btn:hover{background:#1B3B56;transform:none;box-shadow:none}
+body[data-page=home] nav>.btn:focus-visible,body[data-page=home] .hh .btn.ghost:focus-visible{outline:2px solid #F3EFE7;outline-offset:3px}
+body[data-page=home] .hbook>.btn:focus-visible{outline:2px solid #10243A;outline-offset:3px}
+@media(max-width:900px){body[data-page=home] .hbook>.btn{width:100%}body[data-page=home] .hh .btn.ghost{max-width:100%;white-space:normal}}
