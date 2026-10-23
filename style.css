@@ -575,3 +575,14 @@ html:lang(kz) .hx h1{font-size:clamp(40px,4.4vw,66px)}@media(min-width:901px){.h
 @media(min-width:901px) and (max-width:1200px){.rsum .rdv{white-space:nowrap;font-size:14px}.rsum .rs1{padding:6px 14px}}
 .hres2{background-size:cover;background-position:center center;background-repeat:no-repeat}
 @media(max-width:900px){.hres2{background-image:linear-gradient(rgba(12,10,9,.72),rgba(12,10,9,.45)),url(img/restaurant-hero.webp?v=2)!important;background-position:72% center}}
+/* mobile date picker: single bottom sheet */
+.cx{display:none}
+@media(max-width:900px){
+ html.cal-lock,html.cal-lock body{overflow:hidden}
+ .hx2 .cal,.rsum .cal,.cal{position:fixed;left:max(10px,env(safe-area-inset-left));right:max(10px,env(safe-area-inset-right));bottom:max(10px,env(safe-area-inset-bottom));top:auto;width:auto;max-width:none;max-height:calc(100dvh - 40px);overflow:auto;z-index:100;box-shadow:0 0 0 100vmax rgba(7,21,34,.55),0 20px 50px #0005;padding:14px 14px 18px}
+ .cal .ch{position:relative}.cal .ch span{flex:1;text-align:center}
+ .cx{display:grid;place-items:center;width:40px;height:40px;border:0;background:#F3EFE7;border-radius:50%;font-size:22px;color:#10243A;cursor:pointer;margin-left:8px;order:3}
+ .cal .cg button{height:44px;font-size:16px}
+}
+.cal-bd{position:fixed;inset:0;background:rgba(7,21,34,.55);z-index:99}
+@media(max-width:900px){.hx2 .cal,.rsum .cal,.cal{box-shadow:0 20px 50px #0005}}

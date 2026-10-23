@@ -142,18 +142,19 @@ function bkInit(){const f=document.getElementById("book");if(!f)return;
  ci.onchange=()=>{BK.ci=ci.value;co.min=addD(ci.value,1);if(co.value<=ci.value)co.value=addD(ci.value,1);BK.co=co.value;saveBk()};co.onchange=()=>{BK.co=co.value;saveBk()};gLabel();
  document.addEventListener("click",e=>{const g=document.querySelector(".gsel");if(g&&!g.contains(e.target))g.classList.remove("open")})}
 let calM;
-function calOpen(f,which,host){document.querySelectorAll(".cal").forEach(c=>c.remove());const lg=document.documentElement.lang,loc={zh:"zh-CN",ru:"ru-RU",en:"en-GB",kz:"kk-KZ"}[lg],td=iso(new Date());
- calM=calM||new Date(f[which].value.slice(0,7)+"-01T00:00");const c=document.createElement("div");c.className="cal";c.onclick=e=>e.stopPropagation();host.appendChild(c);
+function calClose(){document.querySelectorAll(".cal,.cal-bd").forEach(x=>x.remove());document.documentElement.classList.remove("cal-lock")}
+function calOpen(f,which,host){document.querySelectorAll(".cal").forEach(c=>calClose());const lg=document.documentElement.lang,loc={zh:"zh-CN",ru:"ru-RU",en:"en-GB",kz:"kk-KZ"}[lg],td=iso(new Date());
+ {const v=(which=="co"&&f.ci.value)||f[which].value||f.ci.value||td;calM=new Date(v.slice(0,7)+"-01T00:00");if(isNaN(calM))calM=new Date(td.slice(0,7)+"-01T00:00")}const c=document.createElement("div");c.className="cal";c.onclick=e=>e.stopPropagation();(innerWidth<=900?document.body:host).appendChild(c);
  const wd=[...Array(7)].map((_,i)=>new Date(2024,0,1+i).toLocaleDateString(loc,{weekday:"short"}));
  const month=m=>{const y=m.getFullYear(),mo=m.getMonth(),first=(new Date(y,mo,1).getDay()+6)%7,days=new Date(y,mo+1,0).getDate();let h=`<div class="cm"><b>${m.toLocaleDateString(loc,{month:"long",year:"numeric"})}</b><div class="cg">${wd.map(w=>`<i>${w}</i>`).join("")}${"<span></span>".repeat(first)}`;
   for(let d=1;d<=days;d++){const s=`${y}-${pad(mo+1)}-${pad(d)}`,ci=f.ci.value,co=f.co.value,dis=s<td||(which=="co"&&s<=ci);h+=`<button type="button" data-d="${s}" ${dis?"disabled":""} class="${s==ci?"st":""}${s==co?" ed":""}${s>ci&&s<co?" cr-in":""}${s==td?" td":""}">${d}</button>`}return h+"</div></div>"};
- const draw=()=>{const m2=new Date(calM.getFullYear(),calM.getMonth()+1,1);c.innerHTML=`<div class="ch"><button type="button" class="nv" data-n="-1" aria-label="prev">‹</button><span>${which=="ci"?hq("ci"):hq("co")}</span><button type="button" class="nv" data-n="1" aria-label="next">›</button></div><div class="cms">${month(calM)}${month(m2)}</div>`;
+ const draw=()=>{const m2=new Date(calM.getFullYear(),calM.getMonth()+1,1);c.innerHTML=`<div class="ch"><button type="button" class="nv" data-n="-1" aria-label="prev">‹</button><span>${which=="ci"?hq("ci"):hq("co")}</span><button type="button" class="cx" aria-label="close" onclick="calClose()">×</button><button type="button" class="nv" data-n="1" aria-label="next">›</button></div><div class="cms">${month(calM)}${month(m2)}</div>`;
   c.querySelectorAll(".nv").forEach(b=>b.onclick=()=>{calM=new Date(calM.getFullYear(),calM.getMonth()+ +b.dataset.n,1);draw()});
   c.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>{const v=b.dataset.d;f[which].value=v;f[which].dispatchEvent(new Event("change"));
-   if(which=="ci"){if(f.co.value<=v){f.co.value=addD(v,1);f.co.dispatchEvent(new Event("change"))}c.remove();calOpen(f,"co",f.co.closest("label"))}else c.remove()})};
- draw();if(innerWidth>900){const r=host.getBoundingClientRect(),hgt=c.offsetHeight+24;if(r.bottom+hgt>innerHeight&&r.top>hgt)c.classList.add("up")}
- const esc=e=>{if(e.key=="Escape"){c.remove();host.focus();document.removeEventListener("keydown",esc)}};document.addEventListener("keydown",esc);
- setTimeout(()=>document.addEventListener("click",function h(e){if(!document.body.contains(c)){document.removeEventListener("click",h);return}if(!c.contains(e.target)&&!host.contains(e.target)){c.remove();document.removeEventListener("click",h);document.removeEventListener("keydown",esc)}}))}
+   if(which=="ci"){if(f.co.value<=v){f.co.value=addD(v,1);f.co.dispatchEvent(new Event("change"))}calClose();calOpen(f,"co",f.co.closest("label"))}else calClose()})};
+ draw();if(innerWidth<=900){document.documentElement.classList.add("cal-lock");const bd=document.createElement("div");bd.className="cal-bd";bd.onclick=e=>{e.stopPropagation();calClose()};document.body.appendChild(bd)}if(innerWidth>900){const r=host.getBoundingClientRect(),hgt=c.offsetHeight+24;if(r.bottom+hgt>innerHeight&&r.top>hgt)c.classList.add("up")}
+ const esc=e=>{if(e.key=="Escape"){calClose();host.focus();document.removeEventListener("keydown",esc)}};document.addEventListener("keydown",esc);
+ setTimeout(()=>document.addEventListener("click",function h(e){if(!document.body.contains(c)){document.removeEventListener("click",h);return}if(!c.contains(e.target)&&!host.contains(e.target)){calClose();document.removeEventListener("click",h);document.removeEventListener("keydown",esc)}}))}
 function goBook(f){if(f.classList.contains("hx2")&&!f.dataset.touched){calOpen(f,"ci",f.ci.closest("label"));return false}if(!f.co.value||f.co.value<=f.ci.value||f.ci.value<iso(new Date())){calOpen(f,f.ci.value<iso(new Date())?"ci":"co",f.co.closest("label"));return false}BK.ci=f.ci.value;BK.co=f.co.value;saveBk();const q=new URLSearchParams({ci:BK.ci,co:BK.co,ad:BK.ad,ch:BK.ch});location.href=(CONFIG.bookingUrl||"rooms.html")+"?"+q;return false}
 function evOpen(){const m=document.getElementById("evm");m.querySelector("[name=date]").min=iso(new Date());m.classList.add("on")}
 async function evSend(f){const ok=document.getElementById("evok");ok.style.display="block";
@@ -201,8 +202,8 @@ const views={
  home:()=>shell("","").replace(/url\([^)]*\)/,"url(img/h/28.jpg)").replace(/style="[^"]*"/,`style="background-image:url(img/hero-real-4k.jpg)"`).replace("hero phero","hero hh hx").replace(/<div class="in">[\s\S]*<\/header>/,`<div class="in"><div class="en">Business Hotel · Almaty</div><h1>${HX("t1")}</h1><p class="sub">${HX("t2")}</p>
  <div class="hb"><a class="btn ghost" href="rooms.html">${HX("rooms")} <span class="arw">→</span></a></div></div>
  <form class="hbook hx2" id="book" onsubmit="return goBook(this)">
-  <label>${IC.cal}<div><small>${hq("ci")}</small><b class="dv" data-for="ci">${HX("pick")}</b></div>${IC.chev}<input type="date" name="ci" aria-label="${hq("ci")}"></label>
-  <label>${IC.cal}<div><small>${hq("co")}</small><b class="dv" data-for="co">${HX("pick")}</b></div>${IC.chev}<input type="date" name="co" aria-label="${hq("co")}"></label>
+  <label>${IC.cal}<div><small>${hq("ci")}</small><b class="dv" data-for="ci">${HX("pick")}</b></div>${IC.chev}<input type="hidden" name="ci"></label>
+  <label>${IC.cal}<div><small>${hq("co")}</small><b class="dv" data-for="co">${HX("pick")}</b></div>${IC.chev}<input type="hidden" name="co"></label>
   <div class="gsel" onclick="if(!event.target.closest('.gpop'))this.classList.toggle('open')">${IC.user}<div><small>${hq("gs")}</small><b class="gbtn"></b></div>${IC.chev}
    <div class="gpop">${["ad","ch"].map(k=>`<div><span>${hq(k)}</span><button type="button" onclick="gStep('${k}',-1)">−</button><b id="g_${k}"></b><button type="button" onclick="gStep('${k}',1)">+</button></div>`).join("")}</div></div>
   <button class="btn">${HX("check")} <span class="arw">→</span></button></form></header>`)+`
