@@ -600,3 +600,45 @@ html:lang(kz) .hx h1{font-size:clamp(40px,4.4vw,66px)}@media(min-width:901px){.h
 .hres2 .btn.rbtn{display:inline-flex;align-items:center;justify-content:center;gap:16px;height:58px;padding:0 32px;background:rgba(16,36,58,.85);color:#fff;border:1px solid rgba(243,239,231,.85);border-radius:6px;font-family:"Myriad Pro","Source Sans 3",system-ui,sans-serif;font-size:16px;font-weight:600;box-shadow:none;text-shadow:none;transition:background-color 200ms ease,border-color 200ms ease}
 .hres2 .btn.rbtn:hover{background:#1B3B56;border-color:#fff;transform:none}.hres2 .btn.rbtn .arw{font-size:18px;line-height:1}
 @media(max-width:900px){.hres2{min-height:0;padding:72px 22px}.hres2 h2{font-size:clamp(36px,10vw,42px);margin:18px 0 20px}.hres2 p{font-size:16px;margin-bottom:28px}.hres2 .btn.rbtn{max-width:100%}}
+/* ===== Final polish: unified design system ===== */
+:root{--navy:#10243A;--navy2:#12263B;--ivory:#F3EFE7;--soft:#FBFAF7;--champ:#B8A58C;--graphite:#20252B;--muted:#777A7E}
+/* button system — component variants (no gold gradients) */
+.btn{background:#10243A;color:#fff;border:1px solid #10243A;border-radius:6px;box-shadow:none;text-shadow:none;font-weight:600;font-size:16px;display:inline-flex;align-items:center;justify-content:center;gap:12px;transition:background-color 200ms ease,border-color 200ms ease,color 200ms ease}
+.btn:before,.btn:after{display:none}.btn:hover{background:#1B3B56;border-color:#1B3B56;transform:none;box-shadow:none}
+.btn .arw{font-size:18px;line-height:1}
+.btn.ghost{background:transparent;color:#fff;border:1px solid rgba(243,239,231,.75)}.btn.ghost:hover{background:rgba(243,239,231,.12);border-color:#F3EFE7}
+.rpr2 .btn{background:#10243A;color:#fff}.rpr2 .btn:hover{background:#1B3B56}
+.rpr2 .out{border-color:#B8A58C}
+.btn:focus-visible{outline:2px solid #B8A58C;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.btn{transition:none}}
+/* hero: smaller title, lighter overlay */
+.hx h1{font-size:clamp(38px,4.7vw,70px)}
+html:lang(kz) .hx h1{font-size:clamp(36px,3.9vw,58px)}
+@media(min-width:901px){.hx .in{padding-top:clamp(170px,25vh,250px)}
+ .hx:before{background:linear-gradient(90deg,rgba(11,27,42,.82) 0%,rgba(11,27,42,.58) 26%,rgba(11,27,42,.18) 46%,rgba(11,27,42,0) 60%),linear-gradient(rgba(11,27,42,.5),rgba(11,27,42,0) 18%)}}
+/* section titles: one serif scale */
+.hrt h2,.hmt h2,.hloc2 h2{font-size:clamp(34px,3.3vw,50px);line-height:1.14;font-weight:500;margin:10px 0 18px}
+.hres2 h2{font-size:clamp(42px,4vw,62px)}
+.hrt .en,.hmt .en,.hloc2 .en{color:#B8A58C;font-family:var(--ui);font-size:13px;letter-spacing:.28em}
+/* rooms split */
+.hrooms{align-items:stretch}.hri{background-size:cover;background-position:center}
+.hrt{display:flex;flex-direction:column;justify-content:center}.hrt p{max-width:480px;line-height:1.7}
+.hrth{gap:14px}.hrth img{aspect-ratio:4/3;height:auto;object-fit:cover;border-radius:4px}
+/* events */
+.hmt .btn{background:#10243A;color:#fff}.hmt .lnk{color:#10243A;border-bottom:1px solid #B8A58C;font-weight:600;margin-left:22px}
+.hmeet2 .hm4 .ic{color:#B8A58C}.hmeet2 .hm4 li{font-size:16px;color:#20252B}
+/* location: clean ivory, no pattern */
+body[data-page=home] section{background-image:none}
+.hloc2{background:#F3EFE7;max-width:none;padding:96px max(5%,24px)}.hloc2>*{max-width:640px}
+.hloc2 .hmap{border:1px solid #E2DACB;border-radius:6px;box-shadow:none;max-width:none}
+.hl4 .ic{color:#B8A58C}.hl4 li{color:#20252B}
+.hloc2 .btn{background:#10243A;color:#fff}
+/* footer */
+footer{background:#10243A;color:#FBFAF7;padding:64px max(5%,24px) 22px}
+footer .fg{grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px;max-width:1320px;margin:0 auto}
+footer h4{color:#B8A58C;font-size:12px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:16px;font-family:var(--ui)}
+footer li{line-height:2.1;font-size:15px}footer a{color:#FBFAF7;opacity:.85}footer a:hover{opacity:1}
+footer .copy{max-width:1320px;margin:44px auto 0;border-top:1px solid rgba(251,250,247,.12);padding-top:18px;color:#a9b1ba;font-size:13px}
+footer .flang button{color:#FBFAF7;opacity:.8;font-size:15px}
+@media(max-width:900px){footer .fg{grid-template-columns:1fr 1fr;gap:32px}footer .fg>div:first-child{grid-column:1/-1}.hloc2{padding:64px 16px}.hmt .lnk{display:inline-block;margin:16px 0 0}}
+.hres2>div{max-width:720px}.hmt .btn+.lnk{margin-top:18px;margin-left:0;display:table}
