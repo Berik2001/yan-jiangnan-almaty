@@ -546,3 +546,8 @@ html:lang(kz) .hx h1{font-size:clamp(40px,4.4vw,66px)}@media(min-width:901px){.h
 .gpop button:disabled{opacity:.35;cursor:not-allowed}
 .hx2 .dv,.hx2 .gbtn{white-space:nowrap}.hx2 label>div,.hx2 .gsel>div{min-width:0}.cal{animation:none}
 .cg button.td:not(.st):not(.ed){box-shadow:none;font-weight:inherit}
+/* Rooms: "Modify search" matches home "Check availability" */
+.rsum>.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;white-space:nowrap;height:60px;padding:0 40px;background:#10243A;color:#fff;border:none;border-radius:6px;font-family:"Myriad Pro","Source Sans 3",system-ui,sans-serif;font-size:16px;font-weight:600;box-shadow:none;text-shadow:none;transform:none;transition:background-color 200ms ease}
+.rsum>.btn:before{display:none}.rsum>.btn .arw{color:#fff;font-size:18px;line-height:1}
+.rsum>.btn:hover{background:#1B3B56;transform:none;box-shadow:none}.rsum>.btn:active{background:#0B192A}
+.rsum>.btn:focus-visible{outline:2px solid #10243A;outline-offset:3px}

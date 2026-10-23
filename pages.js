@@ -221,7 +221,7 @@ const views={
   <div class="rs1 gsel">${IC.user}<div><small>${r("gu")}</small><button type="button" class="gbtn" onclick="this.closest('.gsel').classList.toggle('open')"></button></div><button type="button" class="eb" aria-label="edit" onclick="this.closest('.gsel').classList.toggle('open')">${IC.edit}</button>
    <div class="gpop">${["ad","ch"].map(k=>`<div><span>${hq(k)}</span><button type="button" onclick="gStep('${k}',-1)">−</button><b id="g_${k}"></b><button type="button" onclick="gStep('${k}',1)">+</button></div>`).join("")}</div></div>
   <label class="rs1">${IC.tag}<div><small>${r("sr")}</small><select name="rate"><option>${r("best")}</option></select></div></label>
-  <button class="btn">${r("mod")} →</button></form>
+  <button class="btn">${r("mod")} <span class="arw">→</span></button></form>
  <div class="rbar"><h2>${sorted.length} ${r("found")} · <span>${nights} ${RQ("nts")}</span></h2><label>${r("sort")} <select onchange="rSort=+this.value;render()">${["rec","lo","hi"].map((s,i)=>`<option value="${i}" ${i==rSort?"selected":""}>${r(s)}</option>`).join("")}</select></label></div>
  ${sorted.length?sorted.map(x=>rcard2(x,nights)).join(""):`<div class="empty">${RQ("none")}</div>`}
  <p class="rnote">${RQ("note")}</p></div>
