@@ -131,10 +131,21 @@ function gLabel(){const b=document.querySelector(".gbtn");if(b)b.textContent=`${
 function gStep(k,d){BK[k]=Math.max(k=="ad"?1:0,Math.min(8,BK[k]+d));saveBk();gLabel()}
 function bkInit(){const f=document.getElementById("book");if(!f)return;
  if(f.classList.contains("hx2")){const loc={zh:"zh-CN",ru:"ru-RU",en:"en-GB",kz:"kk-KZ"}[document.documentElement.lang],show=()=>f.querySelectorAll(".dv").forEach(d=>{const v=f[d.dataset.for].value;d.textContent=v&&f.dataset.touched?new Date(v+"T00:00").toLocaleDateString(loc,{day:"numeric",month:"long"}):HX("pick")});
-  f.querySelectorAll("label").forEach(l=>l.onclick=e=>{const i=l.querySelector("input");try{i.showPicker()}catch(_){i.focus()}});
+  f.querySelectorAll("label").forEach(l=>{const i=l.querySelector("input");i.tabIndex=-1;i.style.pointerEvents="none";l.tabIndex=0;l.onclick=e=>{if(!e.target.closest(".cal"))calOpen(f,i.name,l)};l.onkeydown=e=>{if(e.key=="Enter"||e.key==" "){e.preventDefault();calOpen(f,i.name,l)}}});f._show=show;
   setTimeout(()=>{f.ci.addEventListener("change",()=>{f.dataset.touched=1;show()});f.co.addEventListener("change",()=>{f.dataset.touched=1;show()});show()})}const ci=f.ci,co=f.co,td=iso(new Date());ci.min=td;ci.value=BK.ci;co.min=addD(BK.ci,1);co.value=BK.co;
  ci.onchange=()=>{BK.ci=ci.value;co.min=addD(ci.value,1);if(co.value<=ci.value)co.value=addD(ci.value,1);BK.co=co.value;saveBk()};co.onchange=()=>{BK.co=co.value;saveBk()};gLabel();
  document.addEventListener("click",e=>{const g=document.querySelector(".gsel");if(g&&!g.contains(e.target))g.classList.remove("open")})}
+let calM;
+function calOpen(f,which,host){document.querySelectorAll(".cal").forEach(c=>c.remove());const lg=document.documentElement.lang,loc={zh:"zh-CN",ru:"ru-RU",en:"en-GB",kz:"kk-KZ"}[lg],td=iso(new Date());
+ calM=calM||new Date(f[which].value.slice(0,7)+"-01T00:00");const c=document.createElement("div");c.className="cal";c.onclick=e=>e.stopPropagation();host.appendChild(c);
+ const wd=[...Array(7)].map((_,i)=>new Date(2024,0,1+i).toLocaleDateString(loc,{weekday:"short"}));
+ const month=m=>{const y=m.getFullYear(),mo=m.getMonth(),first=(new Date(y,mo,1).getDay()+6)%7,days=new Date(y,mo+1,0).getDate();let h=`<div class="cm"><b>${m.toLocaleDateString(loc,{month:"long",year:"numeric"})}</b><div class="cg">${wd.map(w=>`<i>${w}</i>`).join("")}${"<span></span>".repeat(first)}`;
+  for(let d=1;d<=days;d++){const s=iso(new Date(Date.UTC(y,mo,d))),ci=f.ci.value,co=f.co.value,dis=s<td||(which=="co"&&s<=ci);h+=`<button type="button" data-d="${s}" ${dis?"disabled":""} class="${s==ci?"st":""}${s==co?" ed":""}${s>ci&&s<co?" in":""}${s==td?" td":""}">${d}</button>`}return h+"</div></div>"};
+ const draw=()=>{const m2=new Date(calM.getFullYear(),calM.getMonth()+1,1);c.innerHTML=`<div class="ch"><button type="button" class="nv" data-n="-1" aria-label="prev">‹</button><span>${which=="ci"?hq("ci"):hq("co")}</span><button type="button" class="nv" data-n="1" aria-label="next">›</button></div><div class="cms">${month(calM)}${month(m2)}</div>`;
+  c.querySelectorAll(".nv").forEach(b=>b.onclick=()=>{calM=new Date(calM.getFullYear(),calM.getMonth()+ +b.dataset.n,1);draw()});
+  c.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>{const v=b.dataset.d;f[which].value=v;f[which].dispatchEvent(new Event("change"));
+   if(which=="ci"){if(f.co.value<=v){f.co.value=addD(v,1);f.co.dispatchEvent(new Event("change"))}c.remove();calOpen(f,"co",f.co.closest("label"))}else c.remove()})};
+ draw();setTimeout(()=>document.addEventListener("click",function h(e){if(!c.contains(e.target)&&!host.contains(e.target)){c.remove();document.removeEventListener("click",h)}}))}
 function goBook(f){BK.ci=f.ci.value;BK.co=f.co.value;saveBk();const q=new URLSearchParams({ci:BK.ci,co:BK.co,ad:BK.ad,ch:BK.ch});location.href=(CONFIG.bookingUrl||"rooms.html")+"?"+q;return false}
 function evOpen(){const m=document.getElementById("evm");m.querySelector("[name=date]").min=iso(new Date());m.classList.add("on")}
 async function evSend(f){const ok=document.getElementById("evok");ok.style.display="block";
