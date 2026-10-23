@@ -551,3 +551,10 @@ html:lang(kz) .hx h1{font-size:clamp(40px,4.4vw,66px)}@media(min-width:901px){.h
 .rsum>.btn:before{display:none}.rsum>.btn .arw{color:#fff;font-size:18px;line-height:1}
 .rsum>.btn:hover{background:#1B3B56;transform:none;box-shadow:none}.rsum>.btn:active{background:#0B192A}
 .rsum>.btn:focus-visible{outline:2px solid #10243A;outline-offset:3px}
+/* rooms search: summary/edit states */
+.rsum .rdate{cursor:pointer;position:relative}.rsum .rdate:hover .rdv,.rsum .gsel:hover .gbtn{color:#10243A;text-decoration:underline;text-decoration-color:#B8A58C;text-underline-offset:4px}
+.rsum .gsel{cursor:pointer}.rsum .gbtn{display:block;font-size:17px;font-weight:500;color:var(--tx)}
+.rsum .rdv{white-space:nowrap}.rsum .m2{display:none}.rsum.dirty .m1{display:none}.rsum.dirty .m2{display:inline}
+.rsum .cal{top:calc(100% + 16px);left:0}.rsum .gpop{top:calc(100% + 16px);color:#12263B}
+.rsum .gpop button{width:36px;height:36px;border:1px solid #cdbf9f;color:#12263B}
+@media(max-width:900px){.rsum .cg button{height:44px}}
