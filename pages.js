@@ -158,7 +158,7 @@ const HQ={t1:["阿拉木图的<br>理想商务下榻之地","Идеальный<
  noint:["在线提交尚未连接。请通过联系页面与我们联系。","Онлайн-отправка ещё не подключена. Свяжитесь с нами через страницу контактов.","Online submission is not connected yet. Please reach us via the contact page.","Онлайн жіберу әлі қосылмаған. Байланыс беті арқылы хабарласыңыз."],sent:["已发送，我们会尽快联系您。","Заявка отправлена.","Request sent.","Өтінім жіберілді."],err:["发送失败，请稍后再试。","Ошибка отправки.","Could not send.","Жіберу қатесі."]};
 const hq=k=>HQ[k][LI[document.documentElement.lang]];
 const HXS={t1:["您在阿拉木图的<br>舒适之选","Ваш комфорт<br>в Алматы","Your comfort<br>in Almaty","Алматыдағы<br>сіздің жайлылығыңыз"],
- t2:["舒适客房、中式美食<br>与商务会议空间。","Комфортные номера, китайская кухня<br>и пространства для деловых встреч.","Comfortable rooms, Chinese cuisine<br>and spaces for business meetings.","Жайлы бөлмелер, қытай асханасы<br>және іскерлік кездесу орындары."],
+ t2:["舒适客房、中式美食 <br>与商务会议空间。","Комфортные номера, китайская кухня <br>и пространства для деловых встреч.","Comfortable rooms, Chinese cuisine <br>and spaces for business meetings.","Жайлы бөлмелер, қытай асханасы <br>және іскерлік кездесу орындары."],
  rooms:["查看客房","Смотреть номера","View rooms","Бөлмелерді көру"],pick:["选择日期","Выберите дату","Select date","Күнді таңдаңыз"],check:["查询空房","Проверить доступность","Check availability","Бос орынды тексеру"],book:["立即预订","Забронировать","Book now","Брондау"],
  gw:[["位成人","взрослых","adults","ересек"],["位成人","взрослый","adult","ересек"]]};
 const HX=k=>HXS[k][LI[document.documentElement.lang]];
