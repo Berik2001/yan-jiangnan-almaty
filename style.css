@@ -574,7 +574,7 @@ html:lang(kz) .hx h1{font-size:clamp(40px,4.4vw,66px)}@media(min-width:901px){.h
 @media(max-width:900px){.rg2{grid-template-columns:1fr;overflow:visible}.rth2{flex-direction:row;overflow-x:auto}.rth2 button{flex:0 0 31%;aspect-ratio:4/3;height:auto}}
 @media(min-width:901px) and (max-width:1200px){.rsum .rdv{white-space:nowrap;font-size:14px}.rsum .rs1{padding:6px 14px}}
 .hres2{background-size:cover;background-position:center center;background-repeat:no-repeat}
-@media(max-width:900px){.hres2{background-image:linear-gradient(rgba(12,10,9,.72),rgba(12,10,9,.45)),url(img/restaurant-hero.webp?v=2)!important;background-position:72% center}}
+@media(max-width:900px){.hres2{background-image:linear-gradient(rgba(12,10,9,.72),rgba(12,10,9,.45)),url(img/restaurant-interior.webp)!important;background-position:62% center}}
 /* mobile date picker: single bottom sheet */
 .cx{display:none}
 @media(max-width:900px){
@@ -586,3 +586,9 @@ html:lang(kz) .hx h1{font-size:clamp(40px,4.4vw,66px)}@media(min-width:901px){.h
 }
 .cal-bd{position:fixed;inset:0;background:rgba(7,21,34,.55);z-index:99}
 @media(max-width:900px){.hx2 .cal,.rsum .cal,.cal{box-shadow:0 20px 50px #0005}}
+/* restaurant section: interior */
+.hres2{min-height:clamp(560px,46vw,700px);display:flex;align-items:center;padding:0 max(5.5%,24px);background-position:center center}
+.hres2>div{max-width:640px}.hres2 .en{color:#D7B77B;font-size:14px;letter-spacing:.3em}
+.hres2 h2{font-size:clamp(40px,4.2vw,66px);line-height:1.15;color:#fff}.hres2 p{font-size:19px;color:#F3EBDF;max-width:620px}
+.hres2 .btn{background:#E8C78F;color:#1d1408;border:none;border-radius:6px;box-shadow:none;text-shadow:none;transition:background-color 220ms ease}.hres2 .btn:before{display:none}.hres2 .btn:hover{background:#F0D5A6;transform:none}
+@media(max-width:900px){.hres2{min-height:520px;padding:64px 16px}.hres2 h2{font-size:clamp(34px,9.5vw,42px)}.hres2 p{font-size:17px}.hres2 .btn{min-height:50px}}
