@@ -573,3 +573,5 @@ html:lang(kz) .hx h1{font-size:clamp(40px,4.4vw,66px)}@media(min-width:901px){.h
 @media(max-width:900px){.room2{grid-template-columns:1fr}.rg2{max-height:none}.rth2 button{flex:0 0 30%;aspect-ratio:4/3}}
 @media(max-width:900px){.rg2{grid-template-columns:1fr;overflow:visible}.rth2{flex-direction:row;overflow-x:auto}.rth2 button{flex:0 0 31%;aspect-ratio:4/3;height:auto}}
 @media(min-width:901px) and (max-width:1200px){.rsum .rdv{white-space:nowrap;font-size:14px}.rsum .rs1{padding:6px 14px}}
+.hres2{background-size:cover;background-position:center center;background-repeat:no-repeat}
+@media(max-width:900px){.hres2{background-image:linear-gradient(rgba(12,10,9,.72),rgba(12,10,9,.45)),url(img/restaurant-hero.webp)!important;background-position:72% center}}
