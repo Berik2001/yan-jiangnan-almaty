@@ -512,3 +512,25 @@ body[data-page=home] nav>.btn{height:58px;padding:0 34px;font-size:18px}
 @media(min-width:901px){body[data-page=home] .logo span{white-space:nowrap}.lang{white-space:nowrap;flex-wrap:nowrap}}
 @media(min-width:901px) and (max-width:1500px){body[data-page=home] nav .links a{margin:0 9px;font-size:14.5px}body[data-page=home] .hdx{margin-left:14px;padding-left:18px;gap:16px}body[data-page=home] .lang{margin-right:14px}body[data-page=home] nav>.btn{padding:0 22px;font-size:16px;height:50px}body[data-page=home] .logo span{font-size:19px}}
 @media(min-width:901px) and (max-width:1250px){body[data-page=home] .hdx{display:none}}
+/* ===== Header: robust multilingual layout ===== */
+@media(min-width:901px){
+ nav{display:flex;align-items:center;flex-wrap:nowrap;gap:0}
+ nav>*{flex-shrink:0}
+ nav .logo{margin-right:24px}nav .logo span{white-space:nowrap}
+ nav .links{flex:1 1 auto;min-width:0;display:flex;justify-content:center;align-items:center;flex-wrap:nowrap}
+ nav .links a,body[data-page=home] nav .links a{display:inline-flex;align-items:center;white-space:nowrap;flex-shrink:0;line-height:1.25;margin:0 12px}
+ .hdx,body[data-page=home] .hdx{display:flex;align-items:center;gap:4px;height:32px;margin-left:16px;padding:0 8px 0 16px;border-left:1px solid #ffffff40}
+ .hdx .hsr,.hdx .gl{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;flex:0 0 44px;color:#F3EFE7}
+ .hdx .ic{width:21px;height:21px;color:#F3EFE7;stroke-width:1.75}
+ .lang,body[data-page=home] .lang{display:inline-flex;align-items:center;flex-wrap:nowrap;gap:14px;white-space:nowrap;margin:0 22px 0 6px;background:none;border:0;padding:0}
+ .lang button{margin:0;padding:2px 0;font-size:14px;line-height:1.2}
+ nav>.btn,nav>.btn.hbk,body[data-page=home] nav>.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;width:max-content;min-height:48px;height:48px;padding:0 22px;white-space:nowrap;flex-shrink:0;overflow:visible;font-size:16px;font-weight:600;line-height:1.2;background:#F3EFE7;color:#12263B;border:1px solid rgba(18,38,59,.08);border-radius:6px;box-shadow:none;text-shadow:none}
+ nav>.btn:before{display:none}nav>.btn .arw{margin:0;font-size:18px;line-height:1}nav>.btn:hover{background:#E5DFD5;transform:none}
+ /* compact mode when content doesn't fit (decided by measuring, not by fixed width) */
+ nav.compact .links{display:none;position:absolute;top:100%;right:max(5%,24px);width:280px;flex-direction:column;align-items:stretch;background:#0B1B2Af7;border:1px solid #c9a06344;border-radius:10px;padding:8px}
+ nav.compact.open .links{display:flex}nav.compact .links a{margin:0;padding:12px 14px;border-bottom:1px solid #ffffff12}
+ nav.compact .bur{display:flex;order:5;margin-left:14px}nav.compact .logo{margin-right:auto}
+ nav.tight .hdx{display:none}
+}
+nav .links{padding:0 8px}
+@media(max-width:900px){nav .logo span,body[data-page=home] .logo span{white-space:nowrap;font-size:13px;line-height:1.25}}
