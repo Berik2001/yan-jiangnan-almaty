@@ -558,3 +558,4 @@ html:lang(kz) .hx h1{font-size:clamp(40px,4.4vw,66px)}@media(min-width:901px){.h
 .rsum .cal{top:calc(100% + 16px);left:0}.rsum .gpop{top:calc(100% + 16px);color:#12263B}
 .rsum .gpop button{width:36px;height:36px;border:1px solid #cdbf9f;color:#12263B}
 @media(max-width:900px){.rsum .cg button{height:44px}}
+.rinfo2 em.tst{background:#E8ECF1;color:#4a5562;margin-left:6px}.tot .need{display:block;font-style:normal;color:#10243A;font-weight:600;margin-bottom:2px}
