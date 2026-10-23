@@ -534,3 +534,4 @@ body[data-page=home] nav>.btn{height:58px;padding:0 34px;font-size:18px}
 }
 nav .links{padding:0 8px}
 @media(max-width:900px){nav .logo span,body[data-page=home] .logo span{white-space:nowrap;font-size:13px;line-height:1.25}}
+html:lang(kz) .hx h1{font-size:clamp(40px,4.4vw,66px)}@media(min-width:901px){.hx .in{padding-top:clamp(150px,22vh,230px)}}
