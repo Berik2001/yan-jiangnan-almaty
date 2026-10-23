@@ -123,12 +123,12 @@ Object.assign(IC,{search:sv('<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4
 const DIR="https://www.google.com/maps/dir/?api=1&destination=Business+Hotel+Almaty";
 // Integration layer: set endpoints when the hotel's booking engine / CRM is available
 const CONFIG={bookingUrl:null,eventEndpoint:null};
-const iso=d=>d.toISOString().slice(0,10),addD=(s,n)=>{const d=new Date(s);d.setDate(d.getDate()+n);return iso(d)};
+const pad=n=>String(n).padStart(2,"0"),iso=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`,addD=(s,n)=>{const d=new Date(s+"T00:00");d.setDate(d.getDate()+n);return iso(d)};
 let BK;{const q=new URLSearchParams(location.search);let s={};try{s=JSON.parse(localStorage.bk||"{}")}catch(e){}const td=iso(new Date());
  BK={ci:q.get("ci")||s.ci||td,co:q.get("co")||s.co,ad:+(q.get("ad")||s.ad||2),ch:+(q.get("ch")||s.ch||0)};if(BK.ci<td)BK.ci=td;if(!BK.co||BK.co<=BK.ci)BK.co=addD(BK.ci,1)}
 function saveBk(){try{localStorage.bk=JSON.stringify(BK)}catch(e){}}
-function gLabel(){const b=document.querySelector(".gbtn");if(b)b.textContent=`${BK.ad} ${b.tagName=="B"?HXS.gw[BK.ad==1?1:0][LI[document.documentElement.lang]]:hq("ad").toLowerCase()}${BK.ch?`, ${BK.ch} ${hq("ch").toLowerCase()}`:""}`;["ad","ch"].forEach(k=>{const e=document.getElementById("g_"+k);if(e)e.textContent=BK[k]})}
-function gStep(k,d){BK[k]=Math.max(k=="ad"?1:0,Math.min(8,BK[k]+d));saveBk();gLabel()}
+function gLabel(){const b=document.querySelector(".gbtn");if(b)b.textContent=`${BK.ad} ${b.tagName=="B"?HXS.gw[BK.ad==1?1:0][LI[document.documentElement.lang]]:hq("ad").toLowerCase()}${BK.ch?`, ${BK.ch} ${document.documentElement.lang=="ru"?(BK.ch==1?"ребёнок":BK.ch<5?"ребёнка":"детей"):hq("ch").toLowerCase()}`:""}`;["ad","ch"].forEach(k=>{const e=document.getElementById("g_"+k);if(e){e.textContent=BK[k];const[m,pl]=[e.previousElementSibling,e.nextElementSibling];m.disabled=BK[k]<=(k=="ad"?1:0);pl.disabled=BK[k]>=GMAX[k]}})}
+const GMAX={ad:6,ch:4};function gStep(k,d){BK[k]=Math.max(k=="ad"?1:0,Math.min(GMAX[k],BK[k]+d));saveBk();gLabel()}
 function bkInit(){const f=document.getElementById("book");if(!f)return;
  if(f.classList.contains("hx2")){const loc={zh:"zh-CN",ru:"ru-RU",en:"en-GB",kz:"kk-KZ"}[document.documentElement.lang],show=()=>f.querySelectorAll(".dv").forEach(d=>{const v=f[d.dataset.for].value;d.textContent=v&&f.dataset.touched?new Date(v+"T00:00").toLocaleDateString(loc,{day:"numeric",month:"long"}):HX("pick")});
   f.querySelectorAll("label").forEach(l=>{const i=l.querySelector("input");i.tabIndex=-1;i.style.pointerEvents="none";l.tabIndex=0;l.onclick=e=>{if(!e.target.closest(".cal"))calOpen(f,i.name,l)};l.onkeydown=e=>{if(e.key=="Enter"||e.key==" "){e.preventDefault();calOpen(f,i.name,l)}}});f._show=show;
@@ -140,13 +140,15 @@ function calOpen(f,which,host){document.querySelectorAll(".cal").forEach(c=>c.re
  calM=calM||new Date(f[which].value.slice(0,7)+"-01T00:00");const c=document.createElement("div");c.className="cal";c.onclick=e=>e.stopPropagation();host.appendChild(c);
  const wd=[...Array(7)].map((_,i)=>new Date(2024,0,1+i).toLocaleDateString(loc,{weekday:"short"}));
  const month=m=>{const y=m.getFullYear(),mo=m.getMonth(),first=(new Date(y,mo,1).getDay()+6)%7,days=new Date(y,mo+1,0).getDate();let h=`<div class="cm"><b>${m.toLocaleDateString(loc,{month:"long",year:"numeric"})}</b><div class="cg">${wd.map(w=>`<i>${w}</i>`).join("")}${"<span></span>".repeat(first)}`;
-  for(let d=1;d<=days;d++){const s=iso(new Date(Date.UTC(y,mo,d))),ci=f.ci.value,co=f.co.value,dis=s<td||(which=="co"&&s<=ci);h+=`<button type="button" data-d="${s}" ${dis?"disabled":""} class="${s==ci?"st":""}${s==co?" ed":""}${s>ci&&s<co?" in":""}${s==td?" td":""}">${d}</button>`}return h+"</div></div>"};
+  for(let d=1;d<=days;d++){const s=`${y}-${pad(mo+1)}-${pad(d)}`,ci=f.ci.value,co=f.co.value,dis=s<td||(which=="co"&&s<=ci);h+=`<button type="button" data-d="${s}" ${dis?"disabled":""} class="${s==ci?"st":""}${s==co?" ed":""}${s>ci&&s<co?" cr-in":""}${s==td?" td":""}">${d}</button>`}return h+"</div></div>"};
  const draw=()=>{const m2=new Date(calM.getFullYear(),calM.getMonth()+1,1);c.innerHTML=`<div class="ch"><button type="button" class="nv" data-n="-1" aria-label="prev">‹</button><span>${which=="ci"?hq("ci"):hq("co")}</span><button type="button" class="nv" data-n="1" aria-label="next">›</button></div><div class="cms">${month(calM)}${month(m2)}</div>`;
   c.querySelectorAll(".nv").forEach(b=>b.onclick=()=>{calM=new Date(calM.getFullYear(),calM.getMonth()+ +b.dataset.n,1);draw()});
   c.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>{const v=b.dataset.d;f[which].value=v;f[which].dispatchEvent(new Event("change"));
    if(which=="ci"){if(f.co.value<=v){f.co.value=addD(v,1);f.co.dispatchEvent(new Event("change"))}c.remove();calOpen(f,"co",f.co.closest("label"))}else c.remove()})};
- draw();setTimeout(()=>document.addEventListener("click",function h(e){if(!c.contains(e.target)&&!host.contains(e.target)){c.remove();document.removeEventListener("click",h)}}))}
-function goBook(f){BK.ci=f.ci.value;BK.co=f.co.value;saveBk();const q=new URLSearchParams({ci:BK.ci,co:BK.co,ad:BK.ad,ch:BK.ch});location.href=(CONFIG.bookingUrl||"rooms.html")+"?"+q;return false}
+ draw();if(innerWidth>900){const r=host.getBoundingClientRect(),hgt=c.offsetHeight+24;if(r.bottom+hgt>innerHeight&&r.top>hgt)c.classList.add("up")}
+ const esc=e=>{if(e.key=="Escape"){c.remove();host.focus();document.removeEventListener("keydown",esc)}};document.addEventListener("keydown",esc);
+ setTimeout(()=>document.addEventListener("click",function h(e){if(!document.body.contains(c)){document.removeEventListener("click",h);return}if(!c.contains(e.target)&&!host.contains(e.target)){c.remove();document.removeEventListener("click",h);document.removeEventListener("keydown",esc)}}))}
+function goBook(f){if(f.classList.contains("hx2")&&!f.dataset.touched){calOpen(f,"ci",f.ci.closest("label"));return false}if(!f.co.value||f.co.value<=f.ci.value||f.ci.value<iso(new Date())){calOpen(f,f.ci.value<iso(new Date())?"ci":"co",f.co.closest("label"));return false}BK.ci=f.ci.value;BK.co=f.co.value;saveBk();const q=new URLSearchParams({ci:BK.ci,co:BK.co,ad:BK.ad,ch:BK.ch});location.href=(CONFIG.bookingUrl||"rooms.html")+"?"+q;return false}
 function evOpen(){const m=document.getElementById("evm");m.querySelector("[name=date]").min=iso(new Date());m.classList.add("on")}
 async function evSend(f){const ok=document.getElementById("evok");ok.style.display="block";
  if(!CONFIG.eventEndpoint){ok.className="ok warn";ok.textContent=hq("noint");return false}
@@ -154,7 +156,7 @@ async function evSend(f){const ok=document.getElementById("evok");ok.style.displ
 const HQ={t1:["阿拉木图的<br>理想商务下榻之地","Идеальный<br>бизнес-отель в Алматы","Your ideal<br>business stay<br>in Almaty","Алматыдағы мінсіз<br>іскерлік қонақ үй"],
  t2:["舒适客房 · 正宗中餐 · 会议与宴会","Комфортные номера · Китайская кухня · Мероприятия","Comfortable rooms · Authentic Chinese dining · Meetings & events","Жайлы бөлмелер · Қытай асханасы · Іс-шаралар"],
  bk:["立即预订","Забронировать","Book now","Брондау"],ex:["探索酒店","Об отеле","Explore the hotel","Қонақ үй туралы"],
- ci:["入住","Заезд","Check-in","Кіру"],co:["退房","Выезд","Check-out","Шығу"],gs:["人数","Гости","Guests","Қонақтар"],ad:["成人","Взрослые","Adults","Ересектер"],ch:["儿童","Дети","Children","Балалар"],chk:["查看房价与预订","Цены и бронь","Check rates & book","Баға және бронь"],
+ ci:["入住","Заезд","Check-in","Келу күні"],co:["退房","Выезд","Check-out","Кету күні"],gs:["人数","Гости","Guests","Қонақтар"],ad:["成人","Взрослые","Adults","Ересектер"],ch:["儿童","Дети","Children","Балалар"],chk:["查看房价与预订","Цены и бронь","Check rates & book","Баға және бронь"],
  f:HS.f.map((x,i)=>[...x.slice(0,4),...[["位于阿拉木图市中心","В центре Алматы","In central Almaty","Алматы орталығында"],["宴江南中餐厅","Ресторан «Янь Цзяннань»","Yan Jiangnan restaurant","«Янь Цзяннань» мейрамханасы"],["适合商务与休闲","Для работы и отдыха","For business and leisure","Жұмыс пен демалысқа"],["会议厅与宴会厅","Конференц- и банкетные залы","Meeting & banquet halls","Конференция және банкет залдары"]][i]]),
  eR:["客房","Номера","Rooms","Бөлмелер"],rT:["舒适客房<br>高效入住","Комфортные номера<br>для продуктивной поездки","Comfortable rooms<br>for a productive stay","Нәтижелі сапарға<br>жайлы бөлмелер"],
  rD:["精心设计的客房，舒适便利，满足商务与休闲所需。","Продуманные номера с комфортом и всем необходимым для работы и отдыха.","Thoughtfully designed rooms offering comfort, convenience and everything you need for business or leisure.","Жұмыс пен демалысқа қажеттінің бәрі бар жайлы бөлмелер."],rA:["查看所有房型","Все номера","View all rooms","Барлық бөлмелер"],
@@ -170,7 +172,7 @@ const HQ={t1:["阿拉木图的<br>理想商务下榻之地","Идеальный<
 const hq=k=>HQ[k][LI[document.documentElement.lang]];
 const HXS={t1:["您在阿拉木图的<br>舒适之选","Ваш комфорт<br>в Алматы","Your comfort<br>in Almaty","Алматыдағы<br>сіздің жайлылығыңыз"],
  t2:["舒适客房、中式美食 <br>与商务会议空间。","Комфортные номера, китайская кухня <br>и пространства для деловых встреч.","Comfortable rooms, Chinese cuisine <br>and spaces for business meetings.","Жайлы бөлмелер, қытай асханасы <br>және іскерлік кездесу орындары."],
- rooms:["查看客房","Смотреть номера","View rooms","Бөлмелерді көру"],pick:["选择日期","Выберите дату","Select date","Күнді таңдаңыз"],check:["查询空房","Проверить доступность","Check availability","Бос орынды тексеру"],book:["立即预订","Забронировать","Book now","Брондау"],
+ rooms:["查看客房","Смотреть номера","View rooms","Бөлмелерді көру"],pick:["选择日期","Выберите дату","Select date","Күнді таңдаңыз"],check:["查询空房","Проверить доступность","Check Availability","Бос нөмірлерді тексеру"],book:["立即预订","Забронировать","Book now","Брондау"],
  gw:[["位成人","взрослых","adults","ересек"],["位成人","взрослый","adult","ересек"]]};
 const HX=k=>HXS[k][LI[document.documentElement.lang]];
 const t=k=>S[k][LI[document.documentElement.lang]],nm=a=>a[LI[document.documentElement.lang]];
