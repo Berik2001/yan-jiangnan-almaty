@@ -681,3 +681,17 @@ footer .flang button{color:#FBFAF7;opacity:.8;font-size:15px}
 .grw>*{min-width:0}.grev{overflow:hidden;text-align:left}.grh{text-align:center}
 @media(max-width:1100px){.grw{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:640px){.grc{text-align:left}}
+/* ===== Global typography system: one sans family (hero font = var(--ui): Myriad Pro → Source Sans 3 → Noto Sans SC) ===== */
+:root{--font-primary:var(--ui);--font-regular:400;--font-medium:500;--font-semibold:600;--font-bold:700;--color-navy:#10243A;--color-ivory:#F3EFE7;--color-champagne:#B8A58C;--color-graphite:#20252B;--serif:var(--ui)}
+html:lang(zh){--serif:var(--ui)}
+body,body *:not(svg):not(svg *){font-family:var(--ui)!important}
+h1,h2{font-weight:700!important;letter-spacing:-.015em}
+h2{font-size:clamp(30px,3.2vw,50px)!important;line-height:1.14!important}
+.hx h1{letter-spacing:-.02em;line-height:1.1}
+h3,h4{font-weight:600!important;letter-spacing:0}
+.btn,button,nav a{font-weight:600}
+.en{font-weight:600}
+.grn{font-weight:700;font-size:64px;letter-spacing:-.02em}
+.grv p{font-size:17px;line-height:1.6;font-weight:400}
+.grv b{font-weight:600}
+@media(max-width:640px){h2{font-size:clamp(28px,8vw,34px)!important}}
