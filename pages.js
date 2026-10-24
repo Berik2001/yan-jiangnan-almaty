@@ -199,7 +199,7 @@ const foot=()=>`<footer><div class="fg"><div><div class="logo" style="color:#fff
 <div class="copy"><span>© ${new Date().getFullYear()} Business Hotel Almaty</span><span data-t="pr"></span></div></footer>`;
 
 const views={
- home:()=>shell("","").replace(/url\([^)]*\)/,"url(img/h/28.jpg)").replace(/style="[^"]*"/,`style="background-image:url(img/hero-real-4k.jpg)"`).replace("hero phero","hero hh hx").replace(/<div class="in">[\s\S]*<\/header>/,`<div class="in"><div class="en">Business Hotel · Almaty</div><h1>${HX("t1")}</h1><p class="sub">${HX("t2")}</p>
+ home:()=>shell("","").replace(/url\([^)]*\)/,"url(img/h/28.jpg)").replace(/style="[^"]*"/,`style="background-image:url(img/hero-clean.jpg)"`).replace("hero phero","hero hh hx").replace(/<div class="in">[\s\S]*<\/header>/,`<div class="in"><div class="en">Business Hotel · Almaty</div><h1>${HX("t1")}</h1><p class="sub">${HX("t2")}</p>
  <div class="hb"><a class="btn ghost" href="rooms.html">${HX("rooms")} <span class="arw">→</span></a></div></div>
  <form class="hbook hx2" id="book" onsubmit="return goBook(this)">
   <label>${IC.cal}<div><small>${hq("ci")}</small><b class="dv" data-for="ci">${HX("pick")}</b></div>${IC.chev}<input type="hidden" name="ci"></label>
