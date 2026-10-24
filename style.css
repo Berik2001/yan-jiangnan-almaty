@@ -689,9 +689,11 @@ h1,h2{font-weight:700!important;letter-spacing:-.015em}
 h2{font-size:clamp(30px,3.2vw,50px)!important;line-height:1.14!important}
 .hx h1{letter-spacing:-.02em;line-height:1.1}
 h3,h4{font-weight:600!important;letter-spacing:0}
-.btn,button,nav a{font-weight:600}
 .en{font-weight:600}
 .grn{font-weight:700;font-size:64px;letter-spacing:-.02em}
 .grv p{font-size:17px;line-height:1.6;font-weight:400}
 .grv b{font-weight:600}
 @media(max-width:640px){h2{font-size:clamp(28px,8vw,34px)!important}}
+/* Restore original heading weight: before bf156b8 only Source Sans 3 400/500/600 was loaded, so weight 700 rendered as 600 */
+h1,h2,.grn{font-weight:600!important}
+.hx h1,h1,h2{letter-spacing:-.01em}
