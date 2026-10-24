@@ -176,6 +176,29 @@ const HQ={t1:["阿拉木图的<br>理想商务下榻之地","Идеальный<
  dir:["查看路线","Маршрут","View directions","Бағыт"],brand:["舒适入住 · 用心服务","Комфортное проживание. Внимательный сервис.","Comfortable stays. Meaningful connections.","Жайлы тұру. Мұқият қызмет."],cpage:["联系页面","Страница контактов","Contact page","Байланыс беті"],lang:["语言","Язык","Language","Тіл"],
  evt:[["商务会议","Деловая встреча","Business meeting","Іскерлік кездесу"],["大型会议","Конференция","Conference","Конференция"],["婚宴","Свадьба","Wedding","Той"],["宴会/庆典","Банкет / праздник","Banquet / celebration","Банкет / мереке"]],evd:["计划日期","Дата","Planned date","Күні"],
  noint:["在线提交尚未连接。请通过联系页面与我们联系。","Онлайн-отправка ещё не подключена. Свяжитесь с нами через страницу контактов.","Online submission is not connected yet. Please reach us via the contact page.","Онлайн жіберу әлі қосылмаған. Байланыс беті арқылы хабарласыңыз."],sent:["已发送，我们会尽快联系您。","Заявка отправлена.","Request sent.","Өтінім жіберілді."],err:["发送失败，请稍后再试。","Ошибка отправки.","Could not send.","Жіберу қатесі."]};
+// Guest reviews. Sources: owner-supplied reference (2GIS). Aggregate counts omitted until verified.
+const RV_SUM={rating:4.9,source:"2GIS",url:"https://2gis.kz/almaty/search/Business%20Hotel%20Almaty"};
+const RV_DATA=[
+ {id:1,author:"Umit Orazalieva",rating:5,text:"Номера просторные, чистые и уютные. Завтрак хороший, персонал внимательный, расположение удобное.",source:"2GIS"},
+ {id:2,author:"Bakhargul",rating:5,text:"Очень красивое место, атмосфера классная.",source:"2GIS"},
+ {id:3,author:"Azat Nadyrbekov",rating:5,text:"Отличная гостиница.",source:"2GIS"}];
+const RVT={e:["宾客评价","Отзывы гостей","Guest reviews","Қонақтар пікірі"],h:["宾客的信赖","Нам доверяют гости со всего мира","Trusted by guests from around the world","Бізге әлем қонақтары сенеді"],
+ d:["了解宾客对入住 Business Hotel Almaty 的评价。","Узнайте, что говорят гости о проживании в Business Hotel Almaty.","See what guests say about staying at Business Hotel Almaty.","Business Hotel Almaty туралы қонақтар не дейтінін біліңіз."],
+ r:["2GIS 评分","Рейтинг в 2ГИС","Rating on 2GIS","2ГИС рейтингі"],a:["查看全部评价","Смотреть все отзывы","See all reviews","Барлық пікірлер"],
+ s:["2GIS 评价","Отзыв на 2ГИС","Review on 2GIS","2ГИС-тегі пікір"],o:["原文（俄语）","","Original in Russian","Түпнұсқа орыс тілінде"],p:["上一条","Назад","Previous","Артқа"],n:["下一条","Вперёд","Next","Алға"]};
+const rvt=k=>RVT[k][LI[document.documentElement.lang]];
+const STARS=n=>`<span class="rvs" aria-label="${n}/5">${"★".repeat(n)}${"☆".repeat(5-n)}</span>`;
+function gRev(){const lang=document.documentElement.lang,num=RV_SUM.rating.toLocaleString(lang==="kz"?"kk":lang);
+ return `<section class="grev" aria-labelledby="grevh"><div class="grh"><div class="en">${rvt("e")}</div><i class="grd"></i><h2 id="grevh">${rvt("h")}</h2><p>${rvt("d")}</p></div>
+ <div class="grw"><div class="grc"><div class="grl"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>2GIS</div>
+  <b class="grn">${num}</b>${STARS(5)}<span class="grr">${rvt("r")}</span><a class="grb" href="${RV_SUM.url}" target="_blank" rel="noopener">${rvt("a")} <span class="arw">→</span></a></div>
+  <div class="grt" tabindex="0" onscroll="rvDots()" onkeydown="if(event.key=='ArrowRight'){rvGo(1);event.preventDefault()}if(event.key=='ArrowLeft'){rvGo(-1);event.preventDefault()}">${RV_DATA.map(v=>`<article class="grv"><div class="grq">${STARS(v.rating)}<span aria-hidden="true">”</span></div><p lang="ru">«${v.text}»</p>${rvt("o")?`<small>${rvt("o")}</small>`:""}<i></i><b>${v.author}</b><span>${rvt("s")}</span></article>`).join("")}</div></div>
+ <div class="grnav"><button type="button" aria-label="${rvt("p")}" onclick="rvGo(-1)">‹</button><div class="grdots"></div><button type="button" aria-label="${rvt("n")}" onclick="rvGo(1)">›</button></div></section>`}
+function rvGo(d){const t=document.querySelector(".grt");if(!t)return;const c=t.querySelector(".grv");t.scrollBy({left:d*(c.offsetWidth+parseFloat(getComputedStyle(t).columnGap)),behavior:"smooth"})}
+function rvDots(){const t=document.querySelector(".grt"),n=document.querySelector(".grnav");if(!t||!n)return;const c=t.querySelector(".grv"),step=c.offsetWidth+parseFloat(getComputedStyle(t).columnGap),pages=Math.round((t.scrollWidth-t.clientWidth)/step)+1;
+ n.hidden=pages<2;const i=Math.round(t.scrollLeft/step);n.querySelector(".grdots").innerHTML=Array.from({length:pages},(_,k)=>`<i class="${k==i?"on":""}"></i>`).join("");
+ const b=n.querySelectorAll("button");b[0].disabled=i<=0;b[1].disabled=i>=pages-1}
+addEventListener("resize",rvDots);new MutationObserver(()=>{if(document.querySelector(".grt .grv")&&!document.querySelector(".grdots i"))rvDots()}).observe(document.documentElement,{childList:true,subtree:true});
 const hq=k=>HQ[k][LI[document.documentElement.lang]];
 const HXS={t1:["您在阿拉木图的<br>舒适之选","Ваш комфорт<br>в Алматы","Your comfort<br>in Almaty","Алматыдағы<br>сіздің жайлылығыңыз"],
  t2:["舒适客房、中式美食 <br>与商务会议空间。","Комфортные номера, китайская кухня <br>и пространства для деловых встреч.","Comfortable rooms, Chinese cuisine <br>and spaces for business meetings.","Жайлы бөлмелер, қытай асханасы <br>және іскерлік кездесу орындары."],
@@ -216,6 +239,7 @@ const views={
  <section class="hloc2"><div class="hlt"><div class="en">${hq("eL")}</div><h2>${hq("lT")}</h2><p>${hq("lD")}</p>
   <ul class="hl4">${["plane","city","bag","mountain"].map((ic,i)=>`<li>${IC[ic]}<span>${HQ.l4[i][L()]}</span></li>`).join("")}</ul><a class="btn" target="_blank" rel="noopener" href="${DIR}">${hq("dir")} <span class="arw">→</span></a></div>
   <div class="hmap"><iframe loading="lazy" title="map" src="https://maps.google.com/maps?q=Business%20Hotel%20Almaty&z=13&output=embed"></iframe></div></section>
+ ${gRev()}
  <div class="modal" id="evm" onclick="if(event.target==this)this.classList.remove('on')"><form class="box rv-f evf" onsubmit="return evSend(this)"><span class="x" onclick="evm.classList.remove('on')">×</span><h3>${hq("mA")}</h3>
   <select name="type" class="full">${HQ.evt.map(e=>`<option>${e[L()]}</option>`).join("")}</select>
   <div class="fl"><input type="date" name="date" required><label>${hq("evd")}</label></div><div class="fl"><input type="number" name="guests" min="1" required placeholder=" "><label>${hq("gs")}</label></div>
