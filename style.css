@@ -697,3 +697,20 @@ h3,h4{font-weight:600!important;letter-spacing:0}
 /* Restore original heading weight: before bf156b8 only Source Sans 3 400/500/600 was loaded, so weight 700 rendered as 600 */
 h1,h2,.grn{font-weight:600!important}
 .hx h1,h1,h2{letter-spacing:-.01em}
+/* Banquet intro: quiet-luxury navy stats panel */
+.bq-intro{display:grid!important;grid-template-columns:1fr 1.15fr;gap:72px;align-items:center;padding-top:110px!important;padding-bottom:110px!important}
+.bq-intro .en{font-size:12px;letter-spacing:.22em;color:#B8A58C;font-weight:600;display:flex;align-items:center;gap:14px}
+.bq-intro .en:after{content:"";width:48px;height:1px;background:#C6A46A}
+.bq-intro h2{color:#10243A!important;margin:18px 0 22px!important}
+.bq-intro p{color:#5E656C;font-size:18px;line-height:1.7;max-width:520px;margin:0}
+.bq-stats{display:grid!important;grid-template-columns:1fr 1fr;gap:0!important;background:#10243A;border-radius:14px;padding:12px;position:relative;overflow:hidden;box-shadow:0 24px 60px -24px rgba(16,36,58,.45)}
+.bq-stats:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 100% 0,rgba(198,164,106,.14),transparent 55%);pointer-events:none}
+.bq-stats>div{background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:40px 40px 36px!important;position:relative;transition:background .3s}
+.bq-stats>div:before{display:none!important}
+.bq-stats>div:nth-child(odd){border-right:1px solid rgba(198,164,106,.22)!important}
+.bq-stats>div:nth-child(-n+2){border-bottom:1px solid rgba(198,164,106,.22)!important}
+.bq-stats>div:hover{background:rgba(255,255,255,.03)!important}
+.bq-stats b{display:block;color:#fff!important;font-size:clamp(44px,4.2vw,64px)!important;font-weight:600!important;line-height:1;letter-spacing:-.02em}
+.bq-stats small{display:flex;align-items:center;gap:10px;margin-top:16px;color:#C6A46A!important;font-size:12px!important;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+.bq-stats small:before{content:"";width:18px;height:1px;background:#C6A46A}
+@media(max-width:900px){.bq-intro{grid-template-columns:1fr;gap:40px;padding-top:64px!important;padding-bottom:64px!important}.bq-stats>div{padding:28px 22px!important}}
