@@ -272,7 +272,7 @@ const views={
  <div class="bq-cta" style="background-image:linear-gradient(90deg,#1a0f08f2 35%,#1a0f0866),url(img/b4.jpg)"><div><div class="en">Make It Unforgettable</div><h2>${t("ctaT")}</h2><p>+7 727 231 88 88 · WeChat · WhatsApp</p><a class="btn" href="contact.html#res">${t("book")} →</a></div></div>`,
  services:()=>shell(t("serT"),"photo-1517248135467-4c7edcad34c4")+`<div class="wrap"><div class="head"><h2 data-t="s0"></h2><div class="en">Facilities & Services</div></div>
  <div class="grid">${S.svc.map((s,i)=>`<div class="box2 ph"><div class="pi"><img src="img/s${i}.jpg" loading="lazy"></div><h3 style="margin-top:22px">${s[1+LI[document.documentElement.lang]]}</h3><p>${s[5+LI[document.documentElement.lang]]}</p></div>`).join("")}</div>
- <div class="gal">${["photo-1559339352-11d035aa65de","photo-1555396273-367ea4eb4db5","photo-1414235077428-338989a2e8c0","photo-1517248135467-4c7edcad34c4"].map(i=>img(i,600)).join("")}</div></div>`,
+ <div class="gal">${[1,2,3,4].map(i=>`<img src="img/lobby${i}.jpg" loading="lazy" alt="Business Hotel Almaty">`).join("")}</div></div>`,
  contact:()=>shell(t("conT"),"").replace(/url\([^)]*\)/,"url(img/contact-hero.jpg)")+`
  <div class="wrap"><div class="cc">${[["📍",D[document.documentElement.lang].ct,D[document.documentElement.lang].addr.replace("📍 ","")],["📞",t("phone"),"+7 727 231 88 88"],["🕐",t("hours"),t("hrs")],["💬","WeChat · WhatsApp","+7 701 888 88 88"]].map(c=>`<div><span>${c[0]}</span><small>${c[1]}</small><b>${c[2]}</b></div>`).join("")}</div>
  <div class="rv" id="res"><div class="rv-img" style="background-image:linear-gradient(#1a0f0822,#1a0f08ee),url(img/b1.jpg)"><div class="en">Reservation</div><h2>${t("resv")}</h2><p>${t("ctaT")}</p><div class="seal">宴</div></div>
