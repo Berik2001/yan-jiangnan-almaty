@@ -714,3 +714,5 @@ h1,h2,.grn{font-weight:600!important}
 .bq-stats small{display:flex;align-items:center;gap:10px;margin-top:16px;color:#C6A46A!important;font-size:12px!important;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
 .bq-stats small:before{content:"";width:18px;height:1px;background:#C6A46A}
 @media(max-width:900px){.bq-intro{grid-template-columns:1fr;gap:40px;padding-top:64px!important;padding-bottom:64px!important}.bq-stats>div{padding:28px 22px!important}}
+/* Home: guests popover opens above the booking bar */
+body[data-page=home] .gpop{top:auto;bottom:calc(100% + 18px);box-shadow:0 -18px 50px #0B1B2A33}
