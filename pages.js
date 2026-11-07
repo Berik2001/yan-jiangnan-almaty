@@ -294,7 +294,7 @@ function fitNav(){const n=document.querySelector("nav");if(!n)return;n.classList
 addEventListener("resize",fitNav);if(document.fonts)document.fonts.ready.then(fitNav);
 function burger(){fitNav();const n=document.querySelector("nav");if(!n||n.querySelector(".bur"))return;const b=document.createElement("button");b.className="bur";b.setAttribute("aria-label","menu");b.innerHTML="<i></i><i></i><i></i>";b.onclick=()=>n.classList.toggle("open");n.appendChild(b)}
 function bind(){document.querySelectorAll(".lang button").forEach(b=>b.onclick=()=>{document.documentElement.lang=b.dataset.l;render()})}
-let s0;try{s0=localStorage.lang}catch(e){}document.documentElement.lang=D[s0]?s0:"ru";
+let s0;try{s0=localStorage.lang}catch(e){}const lgl=document.documentElement.getAttribute("data-lang-lock");document.documentElement.lang=D[lgl]?lgl:D[s0]?s0:"ru";
 if(!views[pg])bind();render();
 
 addEventListener("scroll",()=>{const n=document.querySelector("nav");n&&n.classList.toggle("sc",scrollY>40)},{passive:true});
